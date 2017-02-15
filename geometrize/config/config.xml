@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Geometrize</Name>
+    <Version>1.0.0</Version>
+    <Title>Geometrize Installer</Title>
+    <Publisher>Sam Twidale</Publisher>
+    <StartMenuDir>Geometrize</StartMenuDir>
+    <TargetDir>@HomeDir@/Geometrize</TargetDir>
+</Installer>
