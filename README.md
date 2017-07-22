@@ -2,7 +2,13 @@
 
 This repo hosts the installers for [Geometrize](https://github.com/Tw1ddle/geometrize), an app for geometrizing images into geometric primitives.
 
-Installers for supported platforms are generated via automated builds. The latest builds are made available below:
+Installers for supported platforms are generated via automated builds.
+
+## Get Geometrize
+
+Stable, tested releases of Geometrize are available on the Windows and Mac app stores.
+
+## Development Builds
 
 | Windows       |
 | ------------- |
@@ -23,9 +29,9 @@ Installers for supported platforms are generated via automated builds. The lates
 | x86 clang     |
 | x64 clang     |
 
-## Manual Builds
+## Building Manually
 
-More detail coming soon.
+Details coming soon.
 
 ## Notes
  * Got an idea or suggestion? Open an issue on GitHub, or send Sam a message on [Twitter](https://twitter.com/Sam_Twidale).
