@@ -12,6 +12,10 @@ linux {
     DEPLOY_COMMAND = linuxdeployqt # TODO see: https://github.com/probonopd/linuxdeployqt
 }
 
+isEmpty(DEPLOY_COMMAND){
+    error(Failed to identify a deployment command - is this platform supported?)
+}
+
 isEmpty(TARGET_EXT) {
     win32 {
         TARGET_CUSTOM_EXT = .exe
@@ -23,17 +27,27 @@ isEmpty(TARGET_EXT) {
     TARGET_CUSTOM_EXT = $${TARGET_EXT}
 }
 
-isEmpty(DEPLOY_COMMAND){
-    error(Failed to identify a deployment command - is this platform supported?)
-}
-
 CONFIG(debug, debug|release) {
-    DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/debug/$${TARGET}$${TARGET_CUSTOM_EXT}))
+    DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/debug)
 } else {
-    DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/release/$${TARGET}$${TARGET_CUSTOM_EXT}))
+    DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/release)
 }
 
-# Create the Geometrize installer package
+DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
+
+QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
+
+# Clean the installer package data folder
+INSTALLER_PACKAGE_DATA_DIR = $${_PRO_FILE_PWD_}/installer/packages/com.samtwidale.geometrize/data
+CLEAN_PACKAGE_DATA_DIR = $${QMAKE_DEL_TREE} $$shell_quote($$shell_path($${INSTALLER_PACKAGE_DATA_DIR}))
+QMAKE_POST_LINK += && $${CLEAN_PACKAGE_DATA_DIR}
+
+# Copy the Geometrize resources to the installer package data folder
+COPY_TO_INSTALLER_PACKAGE = $${QMAKE_COPY_DIR} $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR})) $$shell_quote($$shell_path($${INSTALLER_PACKAGE_DATA_DIR}))
+
+QMAKE_POST_LINK += && $${COPY_TO_INSTALLER_PACKAGE}
+
+# Create the Geometrize installer
 win32 {
     IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/
     BINARYCREATOR_NAME = binarycreator.exe
@@ -56,7 +70,7 @@ isEmpty(IFW_LOCATION) {
 
 INSTALLER_NAME = geometrize_installer.exe
 INSTALLER_GENERATION_COMMAND = $$shell_quote($$shell_path($${IFW_LOCATION}$${BINARYCREATOR_NAME})) --offline-only --template $$shell_quote($$shell_path($${IFW_LOCATION}$${INSTALLERBASE_NAME})) --packages $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages)) --config $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/config/config.xml)) --verbose $${INSTALLER_NAME}
+QMAKE_POST_LINK += && $${INSTALLER_GENERATION_COMMAND}
 
-# Execute the deploy, installer binary generation commands (& is to concatenate the commands)
-QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET} &
-QMAKE_POST_LINK += $${INSTALLER_GENERATION_COMMAND}
+# Clean the installer package data folder again
+QMAKE_POST_LINK += && $${CLEAN_PACKAGE_DATA_DIR}
