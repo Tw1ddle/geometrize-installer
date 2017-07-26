@@ -1,3 +1,10 @@
+# Ensure objects and mocs do not go in the destdir build folder
+# This avoids the need to filter these out when packaging the installer later
+OBJECTS_DIR = $${TARGET}_object_files # Intermediate object files directory
+MOC_DIR = $${TARGET}_moc_files # Intermediate moc files directory
+RCC_DIR = $${TARGET}_rcc_files # Intermediate rcc files directory
+UI_DIR = $${TARGET}_ui_files # Intermediate ui files directory
+
 # Run the regular Geometrize build
 include(geometrize/geometrize.pro)
 
@@ -37,13 +44,13 @@ DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TA
 
 QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
 
-# Clean the installer package data folder
-INSTALLER_PACKAGE_DATA_DIR = $${_PRO_FILE_PWD_}/installer/packages/com.samtwidale.geometrize/data
-CLEAN_PACKAGE_DATA_DIR = $${QMAKE_DEL_TREE} $$shell_quote($$shell_path($${INSTALLER_PACKAGE_DATA_DIR}))
+# Clean (delete and recreate) the installer package data folder
+INSTALLER_PACKAGE_DATA_DIR = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages/com.samtwidale.geometrize/data))
+CLEAN_PACKAGE_DATA_DIR = $${QMAKE_DEL_TREE} $${INSTALLER_PACKAGE_DATA_DIR} && $${QMAKE_MKDIR} $${INSTALLER_PACKAGE_DATA_DIR}
 QMAKE_POST_LINK += && $${CLEAN_PACKAGE_DATA_DIR}
 
 # Copy the Geometrize resources to the installer package data folder
-COPY_TO_INSTALLER_PACKAGE = $${QMAKE_COPY_DIR} $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR})) $$shell_quote($$shell_path($${INSTALLER_PACKAGE_DATA_DIR}))
+COPY_TO_INSTALLER_PACKAGE = $${QMAKE_COPY_DIR} $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR})) $${INSTALLER_PACKAGE_DATA_DIR}
 
 QMAKE_POST_LINK += && $${COPY_TO_INSTALLER_PACKAGE}
 
@@ -69,7 +76,11 @@ isEmpty(IFW_LOCATION) {
 }
 
 INSTALLER_NAME = geometrize_installer.exe
-INSTALLER_GENERATION_COMMAND = $$shell_quote($$shell_path($${IFW_LOCATION}$${BINARYCREATOR_NAME})) --offline-only --template $$shell_quote($$shell_path($${IFW_LOCATION}$${INSTALLERBASE_NAME})) --packages $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages)) --config $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/config/config.xml)) --verbose $${INSTALLER_NAME}
+BINARYCREATOR_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${BINARYCREATOR_NAME}))
+INSTALLER_TEMPLATE_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${INSTALLERBASE_NAME}))
+PACKAGES_DIR_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages))
+INSTALLER_CONFIG_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/config/config.xml))
+INSTALLER_GENERATION_COMMAND = $${BINARYCREATOR_PATH} --offline-only --template $${INSTALLER_TEMPLATE_PATH} --packages $${PACKAGES_DIR_PATH} --config $${INSTALLER_CONFIG_PATH} --verbose $${INSTALLER_NAME}
 QMAKE_POST_LINK += && $${INSTALLER_GENERATION_COMMAND}
 
 # Clean the installer package data folder again
