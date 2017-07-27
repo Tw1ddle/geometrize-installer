@@ -6,4 +6,6 @@
     <Publisher>Sam Twidale</Publisher>
     <StartMenuDir>Geometrize</StartMenuDir>
     <TargetDir>@HomeDir@/Geometrize</TargetDir>
+    <InstallerApplicationIcon>installericon</InstallerApplicationIcon>
+    <InstallerWindowIcon>installericon</InstallerWindowIcon>
 </Installer>

@@ -1,9 +1,9 @@
 # Ensure objects and mocs do not go in the destdir build folder
 # This avoids the need to filter these out when packaging the installer later
-OBJECTS_DIR = $${TARGET}_object_files # Intermediate object files directory
-MOC_DIR = $${TARGET}_moc_files # Intermediate moc files directory
-RCC_DIR = $${TARGET}_rcc_files # Intermediate rcc files directory
-UI_DIR = $${TARGET}_ui_files # Intermediate ui files directory
+OBJECTS_DIR = object_files # Intermediate object files directory
+MOC_DIR = moc_files # Intermediate moc files directory
+RCC_DIR = rcc_files # Intermediate rcc files directory
+UI_DIR = ui_files # Intermediate ui files directory
 
 # Run the regular Geometrize build
 include(geometrize/geometrize.pro)
@@ -75,7 +75,8 @@ isEmpty(IFW_LOCATION) {
     error(Failed to identity the installer binary creator command - is this platform supported?)
 }
 
-INSTALLER_NAME = geometrize_installer.exe
+INSTALLER_NAME = geometrize_installer_$${QT_ARCH}.exe
+
 BINARYCREATOR_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${BINARYCREATOR_NAME}))
 INSTALLER_TEMPLATE_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${INSTALLERBASE_NAME}))
 PACKAGES_DIR_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages))
