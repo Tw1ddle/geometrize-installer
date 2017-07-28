@@ -75,7 +75,11 @@ isEmpty(IFW_LOCATION) {
     error(Failed to identity the installer binary creator command - is this platform supported?)
 }
 
-INSTALLER_NAME = geometrize_installer_$${QT_ARCH}.exe
+CONFIG(debug, debug|release) {
+    INSTALLER_NAME = geometrize_installer_$${QT_ARCH}_debug.exe
+} else {
+    INSTALLER_NAME = geometrize_installer_$${QT_ARCH}_release.exe
+}
 
 BINARYCREATOR_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${BINARYCREATOR_NAME}))
 INSTALLER_TEMPLATE_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${INSTALLERBASE_NAME}))

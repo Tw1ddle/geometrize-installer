@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package>
     <DisplayName>Geometrize</DisplayName>
-    <Description>Install Geometrize.</Description>
+    <Description>Install Geometrize</Description>
     <Version>1.0.0</Version>
-    <ReleaseDate>2017-02-15</ReleaseDate>
+    <ReleaseDate>2017-07-27</ReleaseDate>
     <Licenses>
-        <License name="TODO Beer Public License Agreement" file="license.txt" />
+        <License name="Geometrize License Agreement" file="LICENSE" />
     </Licenses>
     <Default>true</Default>
-    <Script>installscript.qs</Script>
     <UserInterfaces>
         <UserInterface>page.ui</UserInterface>
     </UserInterfaces>
+    <Script>installerscript.qs</Script>
 </Package>
