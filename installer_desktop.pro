@@ -1,3 +1,5 @@
+# This is the project file for the Geometrize Qt Installer Framework desktop installers.
+
 # Ensure objects and mocs do not go in the destdir build folder
 # This avoids the need to filter these out when packaging the installer later
 OBJECTS_DIR = object_files # Intermediate object files directory
