@@ -1,16 +1,16 @@
 [![Geometrize Installer Logo](https://github.com/Tw1ddle/geometrize-installer/blob/master/screenshots/geometrize_installer_logo.png?raw=true "Geometrize installer logo")](http://www.geometrize.co.uk/)
 
+[![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://github.com/Tw1ddle/geometrize-installer/blob/master/LICENSE)
+
+WORK IN PROGRESS.
+
 This repo contains installer code for [Geometrize](http://www.geometrize.co.uk/), an app for geometrizing images into geometric primitives.
-
-## Get Geometrize
-
-Official releases of Geometrize are available on the Windows and Mac app stores.
 
 [![Geometrized Lotus Flower](https://github.com/Tw1ddle/geometrize-installer/blob/master/screenshots/lotus_flower.jpg?raw=true "Geometrized Lotus Flower, 250 rotated ellipses, 250 triangles")](http://www.geometrize.co.uk/)
 
 ## Development Builds
 
-Untested automated builds from latest development are provided below.
+Untested automated builds from latest development will be provided below.
 
 | Windows       | Status  | Download |
 | ------------- | ------- | -------- |
