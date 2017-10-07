@@ -1,32 +1,184 @@
-language: cpp
-os: linux
-compiler: gcc
 sudo: required
 dist: trusty
 
-# Add encrypted API key
+# Add secure key for Github
 env:
   global:
     - secure: dCvCFxn7Kpxw/eOwRpuJAdzj93PzVl2FNCxHrczsizOO56/rWTb3yb53PZJ9avdszuJkY9CVYjP4B7ox6VOW9GS0GJkxExY0+UUb85SnwkWz/60jhHcxmwh+ergBGXrb7pXgi+4h2QoWZa4Wa79EOxfXU5rGesQJRiqV5Sr03dLYQE0Fn3rjQq7hEdFVCmn9Pbn2XR/SA1D37amNzlvjCQzrTRUH9uZyvuJqnkfBTyy9MsUmQXQwe4d7O1+uwFw0XuYNynUwZuLR8IDlNN2/WybS8gjcJQbJuSYXhoAXKKZ0Jk4TS4Y27jBiOsgWR/1nxNGPHG3HPlSmLYDmCBocvgX92oD4QVYpXVgPbYXayJwk9kCXIiYu7HTZnHiHrQzfLjc9SbVk45p6jAh52IamEu1b7bUwG6fuXb/NQHNkc8Ssp4IbieyKhFSoQWLChXQ2KL6wzmMV6vW+hkPqaaAkCBO5fgeL1RWJStudgKhxUEMe9lHB8Jo6ISvUqg+emGc59GzwT82R89C08cpNQ7L7gJVBgzUq4RuPEhPdnrB/kJM2CvhU8V2VYBfppfAdRF5lcESj1fj4VTwwudvPSBBrVP/YEO5OCBI42mw0iJs6Cy1hggA/yLqByTMQDZTkkZCV1Bp5z6OTLCjkdz5HrPNyayo5/Ar3vpGOIC38wCjIwp4=
 
+# Setup build matrix
+matrix:
+  include:
+#  - os: linux
+#    addons:
+#      apt:
+#        sources:
+#        - ubuntu-toolchain-r-test
+#        packages:
+#        - g++-4.9
+#    env:
+#    - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+
+#  - os: linux
+#    addons:
+#      apt:
+#        sources:
+#        - ubuntu-toolchain-r-test
+#        packages:
+#        - g++-5
+#    env:
+#    - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
+
+#  - os: linux
+#    addons:
+#      apt:
+#        sources:
+#        - ubuntu-toolchain-r-test
+#        packages:
+#        - g++-6
+#    env:
+#    - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+
+  - os: linux
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-7
+    env:
+    - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
+#  - os: linux
+#    addons:
+#      apt:
+#        sources:
+#        - ubuntu-toolchain-r-test
+#        - llvm-toolchain-precise-3.6
+#        packages:
+#        - clang-3.6
+#    env:
+#    - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
+
+#  - os: linux
+#    addons:
+#      apt:
+#        sources:
+#        - ubuntu-toolchain-r-test
+#        - llvm-toolchain-precise-3.7
+#        packages:
+#        - clang-3.7
+#    env:
+#    - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
+
+#  - os: linux
+#    addons:
+#      apt:
+#        sources:
+#        - ubuntu-toolchain-r-test
+#        - llvm-toolchain-precise-3.8
+#        packages:
+#        - clang-3.8
+#    env:
+#    - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8"
+
+#  - os: linux
+#    addons:
+#      apt:
+#        sources:
+#        - llvm-toolchain-trusty-3.9
+#        packages:
+#        - clang-3.9
+#    env:
+#    - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
+
+#  - os: linux
+#    addons:
+#      apt:
+#        sources:
+#        - llvm-toolchain-trusty-4.0
+#        packages:
+#        - clang-4.0
+#    env:
+#    - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
+
+  - os: linux
+    addons:
+      apt:
+        sources:
+        - llvm-toolchain-trusty-5.0
+        packages:
+        - clang-5.0
+    env:
+    - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+
+#  - os: osx
+#    osx_image: xcode8
+#    env:
+#    - MATRIX_EVAL="CC=clang && CXX=clang++"
+#    - OSX_IMAGE_NAME="xcode_8_0"
+
+#  - os: osx
+#    osx_image: xcode8.1
+#    env:
+#    - MATRIX_EVAL="CC=clang && CXX=clang++"
+#    - OSX_IMAGE_NAME="xcode_8_1"
+
+#  - os: osx
+#   osx_image: xcode8.2
+#    env:
+#    - MATRIX_EVAL="CC=clang && CXX=clang++"
+#    - OSX_IMAGE_NAME="xcode_8_2"
+
+#  - os: osx
+#    osx_image: xcode8.3
+#    env:
+#    - MATRIX_EVAL="CC=clang && CXX=clang++"
+#    - OSX_IMAGE_NAME="xcode_8_3"
+
+  - os: osx
+    osx_image: xcode9
+    env:
+    - MATRIX_EVAL="CC=clang && CXX=clang++"
+    - OSX_IMAGE_NAME="xcode_9_0"
+
 before_install:
-  # Add ppa for testing Ubuntu packages
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get update -qq
   # Get the latest version of the Geometrize submodule, and push it to the remote (if necessary)
   - chmod +x ./travis_update_geometrize_submodule.sh
   - ./travis_update_geometrize_submodule.sh
 
+  # Set compilers
+  - eval "${MATRIX_EVAL}"
+  - echo $CC
+  - echo $CXX
+
 install:
-  - sudo apt-get install -qq g++-5
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-  - sudo apt-get install -y qt5-default qttools5-dev-tools libqt5svg5*
+  # Get Qt
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --force qt ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y qt5-default qttools5-dev-tools libqt5svg5* ; fi
 
 script:
   # Build the installer
   - qmake installer.pro
-  - make
+  - make CC=${CC} CXX=${CXX} LINK=${CXX}
 
-# Publish the built installer --- TODO
-after_success:
-  -
+before_deploy:
+  # TODO locate build installer files
+  - ls -a
+  #- pushd ${TRAVIS_BUILD_DIR}
+  #- mkdir build
+  #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then mv geometrize_lib_example build/geometrize_lib_example_${TRAVIS_BUILD_NUMBER}_${TRAVIS_OS_NAME}_${CXX} ; fi
+  #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv geometrize_lib_example.app build/geometrize_lib_example_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${OSX_IMAGE_NAME} ; fi
+  #- popd
+
+# Deploy to Amazon S3
+deploy:
+  provider: s3
+  access_key_id: ${AWS_ACCESS_KEY_ID}
+  secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+  bucket: ${AWS_S3_BUCKET_NAME}
+  local_dir: build
+  skip_cleanup: true
+  upload-dir: ${TRAVIS_OS_NAME}
+  acl: public_read
