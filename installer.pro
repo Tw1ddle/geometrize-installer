@@ -88,3 +88,5 @@ QMAKE_POST_LINK += && $${INSTALLER_GENERATION_COMMAND}
 
 # Clean the installer package data folder again
 QMAKE_POST_LINK += && $${CLEAN_PACKAGE_DATA_DIR}
+
+message($$QMAKE_POST_LINK)
