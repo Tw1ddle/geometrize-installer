@@ -1,4 +1,4 @@
-# This is the project file for the Geometrize Qt Installer Framework desktop installers.
+# This is the project file for the Geometrize desktop app installers.
 
 # Ensure objects and mocs do not go in the destdir build folder
 # This avoids the need to filter these out when packaging the installer later
@@ -10,21 +10,7 @@ UI_DIR = ui_files # Intermediate ui files directory
 # Run the regular Geometrize build
 include(geometrize/geometrize.pro)
 
-# Gather dependencies for deploying Geometrize
-win32 {
-    DEPLOY_COMMAND = windeployqt
-}
-macx {
-    DEPLOY_COMMAND = macdeployqt
-}
-linux {
-    DEPLOY_COMMAND = linuxdeployqt # TODO see: https://github.com/probonopd/linuxdeployqt
-}
-
-isEmpty(DEPLOY_COMMAND){
-    error(Failed to identify a deployment command - is this platform supported?)
-}
-
+# Work out the file extension of the built app
 isEmpty(TARGET_EXT) {
     win32 {
         TARGET_CUSTOM_EXT = .exe
@@ -59,34 +45,38 @@ QMAKE_POST_LINK += && $${COPY_TO_INSTALLER_PACKAGE}
 # Create the Geometrize installer
 win32 {
     IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/
-    BINARYCREATOR_NAME = binarycreator.exe
-    INSTALLERBASE_NAME = installerbase.exe
+
+    exists($${IFW_LOCATION}) {
+
+        DEPLOY_COMMAND = windeployqt
+        BINARYCREATOR_NAME = binarycreator.exe
+        INSTALLERBASE_NAME = installerbase.exe
+        INSTALLER_NAME = geometrize_installer.exe
+
+        BINARYCREATOR_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${BINARYCREATOR_NAME}))
+        INSTALLER_TEMPLATE_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${INSTALLERBASE_NAME}))
+        PACKAGES_DIR_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages))
+        INSTALLER_CONFIG_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/config/config.xml))
+        INSTALLER_GENERATION_COMMAND = $${BINARYCREATOR_PATH} --offline-only --template $${INSTALLER_TEMPLATE_PATH} --packages $${PACKAGES_DIR_PATH} --config $${INSTALLER_CONFIG_PATH} --verbose $${INSTALLER_NAME}
+        QMAKE_POST_LINK += && $${INSTALLER_GENERATION_COMMAND}
+
+    } else {
+        error("Failed to locate the installer binary creator folder")
+    }
 }
+
 macx {
+    DEPLOY_COMMAND = macdeployqt
     IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/ # TODO
     BINARYCREATOR_NAME = binarycreator
     INSTALLERBASE_NAME = installerbase
 }
+
 linux {
+    DEPLOY_COMMAND = linuxdeployqt
     IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/ # TODO
     BINARYCREATOR_NAME = binarycreator
     INSTALLERBASE_NAME = installerbase
 }
-
-isEmpty(IFW_LOCATION) {
-    error(Failed to identity the installer binary creator command - is this platform supported?)
-}
-
-INSTALLER_NAME = geometrize_installer.exe
-
-BINARYCREATOR_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${BINARYCREATOR_NAME}))
-INSTALLER_TEMPLATE_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${INSTALLERBASE_NAME}))
-PACKAGES_DIR_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages))
-INSTALLER_CONFIG_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/config/config.xml))
-INSTALLER_GENERATION_COMMAND = $${BINARYCREATOR_PATH} --offline-only --template $${INSTALLER_TEMPLATE_PATH} --packages $${PACKAGES_DIR_PATH} --config $${INSTALLER_CONFIG_PATH} --verbose $${INSTALLER_NAME}
-QMAKE_POST_LINK += && $${INSTALLER_GENERATION_COMMAND}
-
-# Clean the installer package data folder again
-QMAKE_POST_LINK += && $${CLEAN_PACKAGE_DATA_DIR}
 
 message($$QMAKE_POST_LINK)
