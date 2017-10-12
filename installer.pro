@@ -44,25 +44,30 @@ QMAKE_POST_LINK += && $${COPY_TO_INSTALLER_PACKAGE}
 
 # Create the Geometrize installer
 win32 {
+
+    # Look for local Qt installer framework, else try to download and install it
     IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/
-
     exists($${IFW_LOCATION}) {
-
-        DEPLOY_COMMAND = windeployqt
-        BINARYCREATOR_NAME = binarycreator.exe
-        INSTALLERBASE_NAME = installerbase.exe
-        INSTALLER_NAME = geometrize_installer.exe
-
-        BINARYCREATOR_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${BINARYCREATOR_NAME}))
-        INSTALLER_TEMPLATE_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${INSTALLERBASE_NAME}))
-        PACKAGES_DIR_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages))
-        INSTALLER_CONFIG_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/config/config.xml))
-        INSTALLER_GENERATION_COMMAND = $${BINARYCREATOR_PATH} --offline-only --template $${INSTALLER_TEMPLATE_PATH} --packages $${PACKAGES_DIR_PATH} --config $${INSTALLER_CONFIG_PATH} --verbose $${INSTALLER_NAME}
-        QMAKE_POST_LINK += && $${INSTALLER_GENERATION_COMMAND}
-
     } else {
-        error("Failed to locate the installer binary creator folder")
+        IFW_LOCATION = $${PWD}/tools
+        exists($${IFW_LOCATION}) {
+        } else {
+            message("Failed to locate the installer binary creator folder, will attempt to download it")
+
+            GET_IFW_COMMAND = $${PWD}/scripts/windows_get_ifw.bat
+            QMAKE_POST_LINK += && $${GET_IFW_COMMAND}
+        }
     }
+
+    DEPLOY_COMMAND = windeployqt
+    BINARYCREATOR_NAME = binarycreator.exe
+    INSTALLER_NAME = geometrize_installer.exe
+
+    BINARYCREATOR_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${BINARYCREATOR_NAME}))
+    PACKAGES_DIR_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages))
+    INSTALLER_CONFIG_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/config/config.xml))
+    INSTALLER_GENERATION_COMMAND = $${BINARYCREATOR_PATH} --offline-only --packages $${PACKAGES_DIR_PATH} --config $${INSTALLER_CONFIG_PATH} --verbose $${INSTALLER_NAME}
+    QMAKE_POST_LINK += && $${INSTALLER_GENERATION_COMMAND}
 }
 
 macx {
