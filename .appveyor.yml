@@ -24,14 +24,15 @@ install:
   - if not %QTDIR:msvc=%==%QTDIR% set make=nmake.exe
   - if not %QTDIR:msvc=%==%QTDIR% %make% /? > nul
 
+before_build:
+  - cd %APPVEYOR_BUILD_FOLDER%
+  
   # Get the Qt installer framework
   - pushd scripts
   - appveyor_windows_get_ifw.bat
   - popd
 
-# Run qmake
-before_build:
-  - cd %APPVEYOR_BUILD_FOLDER%
+  # Run qmake
   - qmake CONFIG+=%CONFIGURATION% installer.pro
 
 # Build the project
