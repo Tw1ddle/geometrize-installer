@@ -45,7 +45,7 @@ win32 {
     IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/
     exists($${IFW_LOCATION}) {
     } else {
-        IFW_LOCATION = $${PWD}/tools/
+        IFW_LOCATION = $${PWD}/tools/bin/
         exists($${IFW_LOCATION}) {
         } else {
             message("Could not locate the Qt installer framework, will attempt to download it")
