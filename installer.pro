@@ -52,10 +52,10 @@ win32 {
         IFW_LOCATION = $${PWD}/tools/
         exists($${IFW_LOCATION}) {
         } else {
-            message("Failed to locate the installer binary creator folder, will attempt to download it")
+            message("Could not locate the Qt installer framework, will attempt to download it")
 
             GET_IFW_COMMAND = $$shell_quote($$shell_path($${PWD}/scripts/windows_get_ifw.bat))
-            QMAKE_POST_LINK += && $${GET_IFW_COMMAND}
+            system($${GET_IFW_COMMAND})
         }
     }
 
