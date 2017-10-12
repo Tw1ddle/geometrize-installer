@@ -28,10 +28,6 @@ CONFIG(debug, debug|release) {
     DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/release)
 }
 
-DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
-
-QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
-
 # Clean (delete and recreate) the installer package data folder
 INSTALLER_PACKAGE_DATA_DIR = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages/com.samtwidale.geometrize/data))
 CLEAN_PACKAGE_DATA_DIR = $${QMAKE_DEL_TREE} $${INSTALLER_PACKAGE_DATA_DIR} && $${QMAKE_MKDIR} $${INSTALLER_PACKAGE_DATA_DIR}
@@ -54,12 +50,15 @@ win32 {
         } else {
             message("Could not locate the Qt installer framework, will attempt to download it")
 
-            GET_IFW_COMMAND = $$shell_quote($$shell_path($${PWD}/scripts/windows_get_ifw.bat))
+            GET_IFW_COMMAND = $$shell_quote($$shell_path($${PWD}/scripts/windows_get_ifw.bat)|error("Failed to locate or download Qt installer framework"))
             system($${GET_IFW_COMMAND})
         }
     }
 
     DEPLOY_COMMAND = windeployqt
+    DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
+    QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
+
     BINARYCREATOR_NAME = binarycreator.exe
     INSTALLER_NAME = geometrize_installer.exe
 
