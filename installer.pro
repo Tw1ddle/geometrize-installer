@@ -45,14 +45,11 @@ win32 {
     IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/
     exists($${IFW_LOCATION}) {
     } else {
-        IFW_LOCATION = $${PWD}/tools/bin/
+        IFW_LOCATION = $${PWD}/scripts/ifw/bin/
         exists($${IFW_LOCATION}) {
+            message("Found a downloaded Qt installer framework, will assume this is AppVeyor CI...")
         } else {
-            message("Could not locate the Qt installer framework, will attempt to download it")
-
-            GET_IFW = $$shell_quote($$shell_path($${PWD}/scripts/windows_get_ifw.bat)|error("Failed to locate or download Qt installer framework"))
-            GET_IFW_OUTPUT = system($${GET_IFW})
-            message($${GET_IFW_OUTPUT})
+            error("Could not locate the Qt installer framework, is it installed?")
         }
     }
 

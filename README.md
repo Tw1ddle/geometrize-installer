@@ -2,36 +2,27 @@
 
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://github.com/Tw1ddle/geometrize-installer/blob/master/LICENSE)
 
-WORK IN PROGRESS.
-
 This repo contains installer code for [Geometrize](http://www.geometrize.co.uk/), an app for geometrizing images into geometric primitives.
 
-[![Geometrized Lotus Flower](https://github.com/Tw1ddle/geometrize-installer/blob/master/screenshots/lotus_flower.jpg?raw=true "Geometrized Lotus Flower, 250 rotated ellipses, 250 triangles")](http://www.geometrize.co.uk/)
+[![Geometrized Borrowdale](https://github.com/Tw1ddle/geometrize-installer/blob/master/screenshots/borrowdale.png?raw=true "Geometrized Borrowdale in Autumn, 350 rotated ellipses")](http://www.geometrize.co.uk/)
 
 ## Development Builds
 
-Untested automated builds from latest development will be provided below.
+Untested (and potentially broken) automated builds from latest development are provided below.
 
 | Windows       | Status  | Download |
 | ------------- | ------- | -------- |
-| mingw x86     |         |          |
-| mingw x64     |         |          |
-| msvc 2015 x86 |         |          |
-| msvc 2015 x64 |         |          |
-| msvc 2017 x86 |         |          |
-| msvc 2017 x64 |         |          |
+| mingw x86     | [![Geometrize Windows mingw Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?prefix=windows/) |
+| msvc 2015 x64 | [![Geometrize Windows MSVC2015 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?prefix=windows/) |
+| msvc 2017 x64 | [![Geometrize Windows MSVC2017 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?prefix=windows/) |
 
 | Mac OSX       | Status  | Download |
 | ------------- | ------- | -------- |
-| clang x86     |         |          |
-| clang x64     |         |          |
+| clang x64     | [![Geometrize OSX Installer Build Status](https://img.shields.io/travis/Tw1ddle/geometrize-installer.svg?style=flat-square)](https://travis-ci.org/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?prefix=osx/) |
 
 | Linux         | Status  | Download |
 | ------------- | ------- | -------- |
-| g++ x86       |         |          |
-| g++ x64       |         |          |
-| clang x86     |         |          |
-| clang x64     |         |          |
+| g++ x64       | [![Geometrize Linux Installer Build Status](https://img.shields.io/travis/Tw1ddle/geometrize-installer.svg?style=flat-square)](https://travis-ci.org/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?prefix=linux/) |
 
 ## Notes
  * Got an idea or suggestion? Open an issue on GitHub, or send Sam a message on [Twitter](https://twitter.com/Sam_Twidale).
