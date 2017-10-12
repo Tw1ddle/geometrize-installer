@@ -28,6 +28,11 @@ install:
 before_build:
   - cd %APPVEYOR_BUILD_FOLDER%
   - qmake CONFIG+=%CONFIGURATION% installer.pro
+  - ls -a
+  - cd tools
+  - ls -a
+  - cd bin
+  - ls -a
 
 # Build the project
 build_script:
