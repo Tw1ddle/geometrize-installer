@@ -49,7 +49,7 @@ win32 {
     IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/
     exists($${IFW_LOCATION}) {
     } else {
-        IFW_LOCATION = $${PWD}/tools
+        IFW_LOCATION = $${PWD}/tools/
         exists($${IFW_LOCATION}) {
         } else {
             message("Failed to locate the installer binary creator folder, will attempt to download it")
@@ -72,7 +72,6 @@ win32 {
 
 macx {
     DEPLOY_COMMAND = macdeployqt
-    IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/ # TODO
     BINARYCREATOR_NAME = binarycreator
     INSTALLERBASE_NAME = installerbase
 }
