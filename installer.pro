@@ -50,8 +50,9 @@ win32 {
         } else {
             message("Could not locate the Qt installer framework, will attempt to download it")
 
-            GET_IFW_COMMAND = $$shell_quote($$shell_path($${PWD}/scripts/windows_get_ifw.bat)|error("Failed to locate or download Qt installer framework"))
-            system($${GET_IFW_COMMAND})
+            GET_IFW = $$shell_quote($$shell_path($${PWD}/scripts/windows_get_ifw.bat)|error("Failed to locate or download Qt installer framework"))
+            GET_IFW_OUTPUT = system($${GET_IFW})
+            message($${GET_IFW_OUTPUT})
         }
     }
 

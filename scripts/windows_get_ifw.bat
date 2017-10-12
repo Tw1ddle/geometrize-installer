@@ -8,6 +8,3 @@ appveyor DownloadFile https://download.qt.io/official_releases/qt-installer-fram
 
 @echo Unpack the installer framework
 7z x QtInstallerFramework-win-x86.exe -otools -aoa
-
-@echo Add the installer framework to the path
-set PATH=%BUILD%\tools\bin;%PATH%
