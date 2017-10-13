@@ -31,7 +31,7 @@ CONFIG(debug, debug|release) {
 # Clean (delete and recreate) the installer package data folder
 INSTALLER_PACKAGE_DATA_DIR = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages/com.samtwidale.geometrize/data))
 CLEAN_PACKAGE_DATA_DIR = $${QMAKE_DEL_TREE} $${INSTALLER_PACKAGE_DATA_DIR} && $${QMAKE_MKDIR} $${INSTALLER_PACKAGE_DATA_DIR}
-QMAKE_POST_LINK += && $${CLEAN_PACKAGE_DATA_DIR}
+QMAKE_POST_LINK = $${CLEAN_PACKAGE_DATA_DIR}
 
 # Copy the Geometrize resources to the installer package data folder
 COPY_TO_INSTALLER_PACKAGE = $${QMAKE_COPY_DIR} $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR})) $${INSTALLER_PACKAGE_DATA_DIR}
