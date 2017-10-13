@@ -36,8 +36,6 @@ QMAKE_POST_LINK = $${CLEAN_PACKAGE_DATA_DIR}
 # Copy the Geometrize resources to the installer package data folder
 COPY_TO_INSTALLER_PACKAGE = $${QMAKE_COPY_DIR} $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR})) $${INSTALLER_PACKAGE_DATA_DIR}
 
-QMAKE_POST_LINK += && $${COPY_TO_INSTALLER_PACKAGE}
-
 # Create the Geometrize installer
 win32 {
 
@@ -56,6 +54,8 @@ win32 {
     DEPLOY_COMMAND = windeployqt
     DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
     QMAKE_POST_LINK += && $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
+
+    QMAKE_POST_LINK += && $${COPY_TO_INSTALLER_PACKAGE}
 
     BINARYCREATOR_NAME = binarycreator.exe
     INSTALLER_NAME = geometrize_installer.exe
