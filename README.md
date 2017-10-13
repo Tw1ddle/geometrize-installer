@@ -13,8 +13,8 @@ Untested (and potentially broken) automated builds from latest development are p
 | Windows       | Status  | Download |
 | ------------- | ------- | -------- |
 | mingw x86     | [![Geometrize Windows mingw Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?prefix=windows/) |
-| msvc 2015 x64 | [![Geometrize Windows MSVC2015 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?prefix=windows/) |
-| msvc 2017 x64 | [![Geometrize Windows MSVC2017 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?prefix=windows/) |
+| msvc 2015 x86 | [![Geometrize Windows MSVC2015 x86 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?prefix=windows/) |
+| msvc 2015 x64 | [![Geometrize Windows MSVC2015 x64 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?prefix=windows/) |
 
 | Mac OSX       | Status  | Download |
 | ------------- | ------- | -------- |

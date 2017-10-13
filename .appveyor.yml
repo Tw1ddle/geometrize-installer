@@ -44,7 +44,7 @@ build_script:
 
 # Gather artifacts
 artifacts:
-  - path: '**\*.exe'
+  - path: '**\geometrize_installer*.exe'
     name: geometrize_installer
     type: File
 

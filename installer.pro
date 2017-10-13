@@ -55,7 +55,7 @@ win32 {
 
     DEPLOY_COMMAND = windeployqt
     DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
-    QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
+    QMAKE_POST_LINK += $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
 
     BINARYCREATOR_NAME = binarycreator.exe
     INSTALLER_NAME = geometrize_installer.exe
