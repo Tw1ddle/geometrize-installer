@@ -60,7 +60,7 @@ before_deploy:
   - ls -a
   - mkdir build
   #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then mv geometrize_lib_example build/geometrize_lib_example_${TRAVIS_BUILD_NUMBER}_${TRAVIS_OS_NAME}_${CXX} ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv Geometrize.dmg build/geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${OSX_IMAGE_NAME} ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv Geometrize.dmg build/geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${OSX_IMAGE_NAME}.dmg ; fi
   - popd
 
 # Deploy to Amazon S3
