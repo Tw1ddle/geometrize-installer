@@ -11,4 +11,5 @@
     <Logo>installerlogo.png</Logo>
     <ProductUrl>http://www.geometrize.co.uk/</ProductUrl>
     <ControlScript>installerscript.qs</ControlScript>
+    <WizardStyle>Modern</WizardStyle>
 </Installer>
