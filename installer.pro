@@ -10,34 +10,19 @@ UI_DIR = ui_files # Intermediate ui files directory
 # Perform the regular Geometrize build
 include(geometrize/geometrize.pro)
 
-# Work out the file extension of the built app
-isEmpty(TARGET_EXT) {
-    win32 {
-        TARGET_CUSTOM_EXT = .exe
-    }
-    macx {
-        TARGET_CUSTOM_EXT = .app
-    }
-} else {
-    TARGET_CUSTOM_EXT = $${TARGET_EXT}
-}
-
 CONFIG(debug, debug|release) {
     DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/debug)
 } else {
     DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/release)
 }
 
-# Clean (delete and recreate) the installer package data folder
-INSTALLER_PACKAGE_DATA_DIR = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages/com.samtwidale.geometrize/data))
-CLEAN_PACKAGE_DATA_DIR = $${QMAKE_DEL_TREE} $${INSTALLER_PACKAGE_DATA_DIR} && $${QMAKE_MKDIR} $${INSTALLER_PACKAGE_DATA_DIR}
-QMAKE_POST_LINK = $${CLEAN_PACKAGE_DATA_DIR}
-
-# Copy the Geometrize resources to the installer package data folder
-COPY_TO_INSTALLER_PACKAGE = $${QMAKE_COPY_DIR} $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR})) $${INSTALLER_PACKAGE_DATA_DIR}
-
 # Create the Geometrize installer
+
 win32 {
+    # Clean (delete and recreate) the installer package data folder
+    INSTALLER_PACKAGE_DATA_DIR = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages/com.samtwidale.geometrize/data))
+    CLEAN_PACKAGE_DATA_DIR = $${QMAKE_DEL_TREE} $${INSTALLER_PACKAGE_DATA_DIR} && $${QMAKE_MKDIR} $${INSTALLER_PACKAGE_DATA_DIR}
+    QMAKE_POST_LINK = $${CLEAN_PACKAGE_DATA_DIR}
 
     # Look for local Qt installer framework, else try to download and install it
     IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/
@@ -52,9 +37,12 @@ win32 {
     }
 
     DEPLOY_COMMAND = windeployqt
+    TARGET_CUSTOM_EXT = .exe
     DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
     QMAKE_POST_LINK += && $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
 
+    # Copy the Geometrize resources to the installer package data folder
+    COPY_TO_INSTALLER_PACKAGE = $${QMAKE_COPY_DIR} $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR})) $${INSTALLER_PACKAGE_DATA_DIR}
     QMAKE_POST_LINK += && $${COPY_TO_INSTALLER_PACKAGE}
 
     BINARYCREATOR_NAME = binarycreator.exe
@@ -68,33 +56,11 @@ win32 {
 }
 
 macx {
-
-    # Look for local Qt installer framework, else try to download and install it
-    IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/
-    exists($${IFW_LOCATION}) {
-    } else {
-        IFW_LOCATION = $${PWD}/scripts/ifw/bin/
-        exists($${IFW_LOCATION}) {
-            message("Found a downloaded Qt installer framework, will assume this is Travis CI...")
-        } else {
-            error("Could not locate the Qt installer framework, is it installed?")
-        }
-    }
-
+    # Run macdeployqt to build a .dmg
     DEPLOY_COMMAND = macdeployqt
+    TARGET_CUSTOM_EXT = .app
     DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
-    QMAKE_POST_LINK += && $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
-
-    QMAKE_POST_LINK += && $${COPY_TO_INSTALLER_PACKAGE}
-
-    BINARYCREATOR_NAME = binarycreator.exe
-    INSTALLER_NAME = geometrize_installer.exe
-
-    BINARYCREATOR_PATH = $$shell_quote($$shell_path($${IFW_LOCATION}$${BINARYCREATOR_NAME}))
-    PACKAGES_DIR_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages))
-    INSTALLER_CONFIG_PATH = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/config/config.xml))
-    INSTALLER_GENERATION_COMMAND = $${BINARYCREATOR_PATH} --offline-only --packages $${PACKAGES_DIR_PATH} --config $${INSTALLER_CONFIG_PATH} --verbose $${INSTALLER_NAME}
-    QMAKE_POST_LINK += && $${INSTALLER_GENERATION_COMMAND}
+    QMAKE_POST_LINK += && $${DEPLOY_COMMAND} -dmg $${DEPLOY_TARGET}
 }
 
 linux {

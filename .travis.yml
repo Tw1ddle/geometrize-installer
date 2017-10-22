@@ -40,13 +40,6 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository ppa:beineri/opt-qt591-trusty -y; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq --force-yes; fi
 
-  # Get the Qt installer framework
-  - cd scripts
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then chmod +x ./linux_get_ifw.sh; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./linux_get_ifw.sh; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then chmod +x ./osx_get_ifw.sh; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./osx_get_ifw.sh; fi
-
 install:
   # Install Qt
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install qt59base qt59svg qt59imageformats qt59tools; fi
