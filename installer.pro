@@ -10,15 +10,15 @@ UI_DIR = ui_files # Intermediate ui files directory
 # Perform the regular Geometrize build
 include(geometrize/geometrize.pro)
 
-CONFIG(debug, debug|release) {
-    DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/debug)
-} else {
-    DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/release)
-}
-
 # Create the Geometrize installer
 
 win32 {
+    CONFIG(debug, debug|release) {
+        DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/debug)
+    } else {
+        DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/release)
+    }
+
     # Clean (delete and recreate) the installer package data folder
     INSTALLER_PACKAGE_DATA_DIR = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages/com.samtwidale.geometrize/data))
     CLEAN_PACKAGE_DATA_DIR = $${QMAKE_DEL_TREE} $${INSTALLER_PACKAGE_DATA_DIR} && $${QMAKE_MKDIR} $${INSTALLER_PACKAGE_DATA_DIR}
@@ -59,6 +59,7 @@ macx {
     # Run macdeployqt to build a .dmg
     DEPLOY_COMMAND = macdeployqt
     TARGET_CUSTOM_EXT = .app
+    DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD})
     DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
     DEPLOY_OPTIONS = -dmg
     QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET} $${DEPLOY_OPTIONS}
