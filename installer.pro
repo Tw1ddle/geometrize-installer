@@ -60,13 +60,13 @@ macx {
     DEPLOY_COMMAND = macdeployqt
     TARGET_CUSTOM_EXT = .app
     DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
-    QMAKE_POST_LINK += && $${DEPLOY_COMMAND} -dmg $${DEPLOY_TARGET}
+    QMAKE_POST_LINK = $${DEPLOY_COMMAND} -dmg $${DEPLOY_TARGET}
 }
 
 linux {
     # Hand off control to a script that fetches and runs Linuxdeployqt, creating an appimage
     APPIMAGE_SCRIPT = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/scripts/linux_create_appimage.sh))
-    QMAKE_POST_LINK += && ./$${APPIMAGE_SCRIPT}
+    QMAKE_POST_LINK = ./$${APPIMAGE_SCRIPT}
 }
 
 message($$QMAKE_POST_LINK)
