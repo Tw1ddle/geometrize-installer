@@ -60,7 +60,8 @@ macx {
     DEPLOY_COMMAND = macdeployqt
     TARGET_CUSTOM_EXT = .app
     DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
-    QMAKE_POST_LINK = $${DEPLOY_COMMAND} -dmg $${DEPLOY_TARGET}
+    DEPLOY_OPTIONS = -dmg
+    QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET} $${DEPLOY_OPTIONS}
 }
 
 linux {
