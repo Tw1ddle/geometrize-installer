@@ -16,4 +16,13 @@ yes | cp Geometrize appimage/geometrize
 ./linuxdeployqt appimage/geometrize -bundle-non-qt-libs -verbose=2
 ./linuxdeployqt appimage/geometrize -appimage
 
+pwd
+ls -a
+
+pushd appimage
+
+ls -a
+
+popd
+
 mv appimage/Application-x86_64.AppImage appimage/Geometrize.AppImage

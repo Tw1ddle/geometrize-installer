@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Geometrize
+GenericName=Images to shapes converter
+Comment=Images to shapes converter
+TryExec=Geometrize
+Exec=Geometrize %f
+Terminal=false
+Icon=Geometrize
+Categories=Graphics;2DGraphics;
