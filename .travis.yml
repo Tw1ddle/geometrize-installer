@@ -59,7 +59,7 @@ before_deploy:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then pushd appimage ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ls -a ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then popd ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then mv appimage/Geometrize.AppImage build/geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${OSX_IMAGE_NAME}.AppImage ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then mv Geometrize.AppImage build/geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${CXX}.AppImage ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv Geometrize.dmg build/geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${OSX_IMAGE_NAME}.dmg ; fi
   - popd
 
