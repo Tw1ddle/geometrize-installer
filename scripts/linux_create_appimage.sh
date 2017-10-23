@@ -9,7 +9,7 @@ unset QTDIR; unset QT_PLUGIN_PATH; unset LD_LIBRARY_PATH
 # TODO copy svg plugin dll?
 
 # Create the AppImage
-mkdir bundle
-cp build-geometrize-GCC-Release/Geometrize bundle/geometrize
-./linuxdeployqt bundle/geometrize -bundle-non-qt-libs -verbose=2
-./linuxdeployqt bundle/geometrize -appimage
+mkdir -p appimage
+yes | cp ../build-installer-GCC-Release/Geometrize appimage/geometrize
+./linuxdeployqt appimage/geometrize -bundle-non-qt-libs -verbose=2
+./linuxdeployqt appimage/geometrize -appimage
