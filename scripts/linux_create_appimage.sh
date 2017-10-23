@@ -10,6 +10,6 @@ unset QTDIR; unset QT_PLUGIN_PATH; unset LD_LIBRARY_PATH
 
 # Create the AppImage
 mkdir bundle
-cp geometrize bundle/geometrize
+cp build-geometrize-GCC-Release/Geometrize bundle/geometrize
 ./linuxdeployqt bundle/geometrize -bundle-non-qt-libs -verbose=2
 ./linuxdeployqt bundle/geometrize -appimage
