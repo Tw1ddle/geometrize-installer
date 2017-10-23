@@ -15,3 +15,5 @@ mkdir -p appimage
 yes | cp Geometrize appimage/geometrize
 ./linuxdeployqt appimage/geometrize -bundle-non-qt-libs -verbose=2
 ./linuxdeployqt appimage/geometrize -appimage
+
+mv appimage/Application-x86_64.AppImage appimage/Geometrize.AppImage
