@@ -25,4 +25,10 @@ ls -a
 
 popd
 
-mv appimage/Application-x86_64.AppImage appimage/Geometrize.AppImage
+pushd scripts
+
+ls -a
+
+popd
+
+mv scripts/Geometrize-x86_64.AppImage appimage/Geometrize.AppImage
