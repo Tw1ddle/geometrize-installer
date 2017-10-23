@@ -68,5 +68,5 @@ macx {
 linux {
     # Hand off control to a script that fetches and runs Linuxdeployqt, creating an appimage in the "appimage" subfolder
     APPIMAGE_SCRIPT = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/scripts/linux_create_appimage.sh))
-    QMAKE_POST_LINK = .$${APPIMAGE_SCRIPT}
+    QMAKE_POST_LINK = chmod u+x $${APPIMAGE_SCRIPT} && .$${APPIMAGE_SCRIPT}
 }
