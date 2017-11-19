@@ -1,5 +1,7 @@
 function Component()
 {
+    installer.finishButtonClicked.connect(this, Component.prototype.installationFinished);
+
     gui.pageWidgetByObjectName("LicenseAgreementPage").entered.connect(changeLicenseLabels);
 }
 
@@ -8,4 +10,42 @@ changeLicenseLabels = function()
     page = gui.pageWidgetByObjectName("LicenseAgreementPage");
     page.AcceptLicenseLabel.setText("I accept the license.");
     page.RejectLicenseLabel.setText("I do not accept the license.");
+
+    var widget = gui.currentPageWidget();
+    if (widget != null) {
+        widget.AcceptLicenseRadioButton.checked = true;
+    }
+}
+
+Component.prototype.createOperations = function()
+{
+    try {
+        // Call the base create operations function
+        component.createOperations();
+
+        if (installer.value("os") == "win") { 
+            try {
+                var userProfile = installer.environmentVariable("USERPROFILE");
+                installer.setValue("UserProfile", userProfile);
+                component.addOperation("CreateShortcut", "@TargetDir@\\Geometrize.exe", "@UserProfile@\\Desktop\\Geometrize.lnk");
+                component.addOperation("CreateShortcut", "@TargetDir@\\Geometrize.exe", "@StartMenuDir@\\Geometrize.lnk", "workingDirectory=@TargetDir@");
+            } catch (e) {
+                // Key doesn't exist
+            }
+        }
+    } catch (e) {
+        print(e);
+    }
+}
+
+Component.prototype.installationFinished = function()
+{
+    try {
+        var targetDir = installer.value("TargetDir");
+        if (installer.isInstaller() && installer.status == QInstaller.Success) {
+             installer.executeDetached(targetDir + "/Geometrize.exe");
+        }
+    } catch(e) {
+         print(e);
+    }
 }

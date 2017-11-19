@@ -12,4 +12,6 @@
     <ProductUrl>http://www.geometrize.co.uk/</ProductUrl>
     <ControlScript>installerscript.qs</ControlScript>
     <WizardStyle>Modern</WizardStyle>
+    <WizardDefaultWidth>800</WizardDefaultWidth>
+    <WizardDefaultHeight>600</WizardDefaultHeight>
 </Installer>

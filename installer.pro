@@ -10,8 +10,7 @@ UI_DIR = ui_files # Intermediate ui files directory
 # Perform the regular Geometrize build
 include(geometrize/geometrize.pro)
 
-# Create the Geometrize installer
-
+# Create the Geometrize installer for Windows desktop
 win32 {
     CONFIG(debug, debug|release) {
         DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/debug)
@@ -55,8 +54,8 @@ win32 {
     QMAKE_POST_LINK += && $${INSTALLER_GENERATION_COMMAND}
 }
 
+# Run macdeployqt to build a .dmg for Mac OSX
 macx {
-    # Run macdeployqt to build a .dmg
     DEPLOY_COMMAND = macdeployqt
     TARGET_CUSTOM_EXT = .app
     DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD})
@@ -65,8 +64,8 @@ macx {
     QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET} $${DEPLOY_OPTIONS}
 }
 
+# Hand off control to a script that fetches and runs Linuxdeployqt, creating an appimage in the "appimage" subfolder for Linux
 linux {
-    # Hand off control to a script that fetches and runs Linuxdeployqt, creating an appimage in the "appimage" subfolder
     APPIMAGE_SCRIPT = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/scripts/linux_create_appimage.sh))
     QMAKE_POST_LINK = chmod u+x $${APPIMAGE_SCRIPT} && $${APPIMAGE_SCRIPT}
 }
