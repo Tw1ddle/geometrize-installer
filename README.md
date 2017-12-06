@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://github.com/Tw1ddle/geometrize-installer/blob/master/LICENSE)
 
-This repo contains installer code for [Geometrize](http://www.geometrize.co.uk/), an app for geometrizing images into geometric primitives.
+Development installers for [Geometrize](http://www.geometrize.co.uk/), an app for geometrizing images into geometric primitives.
 
 [![Geometrized Borrowdale](https://github.com/Tw1ddle/geometrize-installer/blob/master/screenshots/borrowdale.png?raw=true "Geometrized Borrowdale in Autumn, 350 rotated ellipses")](http://www.geometrize.co.uk/)
 
