@@ -16,10 +16,10 @@ matrix:
         sources:
         - ubuntu-toolchain-r-test
         packages:
-        - g++-7
-        - libstdc++-7-dev
+        - g++-8
+        - libstdc++-8-dev
     env:
-    - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+    - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 
   - os: osx
     osx_image: xcode9

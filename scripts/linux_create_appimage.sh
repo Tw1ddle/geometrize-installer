@@ -18,15 +18,14 @@ yes | cp Geometrize appdir/geometrize
 
 mkdir -p appdir/usr/
 mkdir -p appdir/usr/bin/
-yes | cp appdir/geometrize appdir/usr/bin/geometrize
+yes | mv appdir/geometrize appdir/usr/bin/geometrize
 
 # Workarounds so the AppImage runs on systems that ship old gcc (and so older libstdc++/libgcc)
 # like Ubuntu 14.04 (see https://github.com/Tw1ddle/geometrize/issues/5)
-# Assumes g++-7 and libstdc++-7-dev were installed and used to build the app
+# Assumes g++-8 and libstdc++-8-dev were installed and used to build the app
 ls -a /usr/lib/x86_64-linux-gnu/
 
 mkdir -p appdir/usr/optional/
-mkdir -p appdir/usr/optional/libgcc_s/
 mkdir -p appdir/usr/optional/libstdc++/
 
 cp /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 ./appdir/usr/optional/libgcc_s/
