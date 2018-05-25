@@ -27,8 +27,6 @@ popd
 # Create the AppImage itself
 ./linuxdeployqt --appimage-extract
 
-ls -a
-
 export PATH=$(readlink -f ./squashfs-root/usr/bin):$PATH
 NAME=$(grep '^Name=.*' appdir/geometrize.desktop | cut -d "=" -f 2 | sed -e 's|\ |_|g')
 ./squashfs-root/usr/bin/appimagetool -g ./appdir/ Geometrize-x86_64.AppImage
@@ -36,7 +34,4 @@ NAME=$(grep '^Name=.*' appdir/geometrize.desktop | cut -d "=" -f 2 | sed -e 's|\
 ls -a
 
 # Move it ready for CI deployment stage to pick it up
-mv appdir/Geometrize-x86_64.AppImage Geometrize.AppImage
-
-# Make it executable
-chmod +x Geometrize.AppImage
+mv Geometrize-x86_64.AppImage Geometrize.AppImage
