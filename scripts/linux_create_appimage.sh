@@ -22,14 +22,15 @@ yes | cp appdir/geometrize appdir/usr/bin/geometrize
 
 # Workarounds so the AppImage runs on systems that ship old gcc (and so older libstdc++/libgcc)
 # like Ubuntu 14.04 (see https://github.com/Tw1ddle/geometrize/issues/5)
-ls -a /lib/x86_64-linux-gnu/
+# Assumes g++-7 and libstdc++-7-dev were installed and used to build the app
+ls -a /usr/lib/x86_64-linux-gnu/
 
 mkdir -p appdir/usr/optional/
 mkdir -p appdir/usr/optional/libgcc_s/
 mkdir -p appdir/usr/optional/libstdc++/
 
-cp /lib/x86_64-linux-gnu/libgcc_s.so.1 ./appdir/usr/optional/libgcc_s/
-cp /lib/x86_64-linux-gnu/libstdc++.so* ./appdir/usr/optional/libstdc++/
+cp /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 ./appdir/usr/optional/libgcc_s/
+cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6.* ./appdir/usr/optional/libstdc++/
 
 wget -c "https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/exec-x86_64.so" -O ./appdir/usr/optional/exec.so
 # Replace AppRun with the patched one
