@@ -29,7 +29,7 @@ popd
 ./squashfs-root/usr/bin/appimagetool -g ./appimage/ Geometrize-x86_64.AppImage
 
 # Move it ready for CI deployment stage to pick it up
-mv Geometrize-x86_64.AppImage Geometrize.AppImage
+mv appimage/Geometrize-x86_64.AppImage Geometrize.AppImage
 
 # Make it executable
 chmod +x Geometrize.AppImage
