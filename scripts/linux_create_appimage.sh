@@ -13,6 +13,17 @@ yes | cp Geometrize appimage/geometrize
 ./linuxdeployqt appimage/geometrize -bundle-non-qt-libs -verbose=2
 ./linuxdeployqt appimage/geometrize -appimage
 
+# Workaround so the AppImage runs on systems that ship old libstdc++ like Ubuntu 14.04 (https://github.com/Tw1ddle/geometrize/issues/5)
+mkdir -p appimage/usr/optional/
+wget -c "https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/exec-x86_64.so" -O ./appimage/usr/optional/exec.so
+mkdir -p appimage/usr/optional/libstdc++/
+cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ./appimage/usr/optional/libstdc++/
+pushd appimage
+rm AppRun
+wget -c "https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/AppRun-patched-x86_64" -O AppRun
+chmod a+x AppRun
+popd
+
 # Move it ready for CI deployment stage to pick it up
 mv Geometrize-x86_64.AppImage Geometrize.AppImage
 
