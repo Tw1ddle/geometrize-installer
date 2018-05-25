@@ -26,8 +26,7 @@ popd
 
 # Create the AppImage itself
 ./linuxdeployqt*.AppImage --appimage-extract
-export PATH=$(readlink -f ./squashfs-root/usr/bin):$PATH
-./squashfs-root/usr/bin/appimagetool -g ./appimage/Geometrize-x86_64.AppImage
+./squashfs-root/usr/bin/appimagetool -g ./appimage/ Geometrize-x86_64.AppImage
 
 # Move it ready for CI deployment stage to pick it up
 mv ./appimage/Geometrize-x86_64.AppImage Geometrize.AppImage
