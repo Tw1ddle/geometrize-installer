@@ -29,9 +29,9 @@ mkdir -p appdir/usr/optional/libgcc_s/
 mkdir -p appdir/usr/optional/libstdc++/
 
 cp /lib/x86_64-linux-gnu/libgcc_s.so.1 ./appdir/usr/optional/libgcc_s/
-cp /lib/x86_64-linux-gnu/libstdc++.so.6 ./appdir/usr/optional/libstdc++/
+cp /lib/x86_64-linux-gnu/libstdc++.so* ./appdir/usr/optional/libstdc++/
 
-wget -c "https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/exec-x86_64.so" -O ./appdir/optional/exec.so
+wget -c "https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/exec-x86_64.so" -O ./appdir/usr/optional/exec.so
 # Replace AppRun with the patched one
 pushd appdir
 rm AppRun
@@ -40,6 +40,6 @@ chmod a+x AppRun
 popd
 
 # Pack everything back into an AppImage
-export PATH=$(readlink -f ./squashfs-root):$PATH
-NAME=geometrize
+export PATH=$(readlink -f ./squashfs-root/usr/bin):$PATH
+NAME=$(grep '^Name=.*' appdir/usr/geometrize.desktop | cut -d "=" -f 2 | sed -e 's|\ |_|g')
 ./squashfs-root/usr/bin/appimagetool -g ./appdir/ Geometrize.AppImage
