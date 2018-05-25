@@ -25,11 +25,11 @@ chmod a+x AppRun
 popd
 
 # Create the AppImage itself
-./linuxdeployqt*.AppImage --appimage-extract
+./linuxdeployqt appimage/geometrize --appimage-extract
 ./squashfs-root/usr/bin/appimagetool -g ./appimage/ Geometrize-x86_64.AppImage
 
 # Move it ready for CI deployment stage to pick it up
-mv ./appimage/Geometrize-x86_64.AppImage Geometrize.AppImage
+mv Geometrize-x86_64.AppImage Geometrize.AppImage
 
 # Make it executable
 chmod +x Geometrize.AppImage
