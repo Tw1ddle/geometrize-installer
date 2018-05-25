@@ -29,7 +29,7 @@ mkdir -p appdir/usr/optional/
 mkdir -p appdir/usr/optional/libstdc++/
 
 cp /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 ./appdir/usr/optional/libgcc_s/
-cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6.* ./appdir/usr/optional/libstdc++/
+cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25 ./appdir/usr/optional/libstdc++/libstdc++.so.6
 
 wget -c "https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/exec-x86_64.so" -O ./appdir/usr/optional/exec.so
 # Replace AppRun with the patched one
