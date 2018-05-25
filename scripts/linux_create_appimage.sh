@@ -8,10 +8,10 @@ chmod a+x linuxdeployqt
 
 unset QTDIR; unset QT_PLUGIN_PATH; unset LD_LIBRARY_PATH
 
-# Create the AppImage
 yes | cp Geometrize appimage/geometrize
+
+# Run linuxdeployqt
 ./linuxdeployqt appimage/geometrize -bundle-non-qt-libs -verbose=2
-./linuxdeployqt appimage/geometrize -appimage
 
 # Workaround so the AppImage runs on systems that ship old libstdc++ like Ubuntu 14.04 (https://github.com/Tw1ddle/geometrize/issues/5)
 mkdir -p appimage/usr/optional/
@@ -23,6 +23,11 @@ rm AppRun
 wget -c "https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/AppRun-patched-x86_64" -O AppRun
 chmod a+x AppRun
 popd
+
+# Create the AppImage itself
+./linuxdeployqt*.AppImage --appimage-extract
+export PATH=$(readlink -f ./squashfs-root/usr/bin):$PATH
+./squashfs-root/usr/bin/appimagetool -g ./appimage/Geometrize-x86_64.AppImage
 
 # Move it ready for CI deployment stage to pick it up
 mv Geometrize-x86_64.AppImage Geometrize.AppImage
