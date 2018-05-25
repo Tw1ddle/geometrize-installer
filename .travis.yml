@@ -16,19 +16,9 @@ matrix:
         sources:
         - ubuntu-toolchain-r-test
         packages:
-        - g++-7
+        - g++-6
     env:
-    - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-
-  - os: linux
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - g++-5.1
-    env:
-    - MATRIX_EVAL="CC=gcc-5.1 && CXX=g++-5.1"
+    - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
   - os: osx
     osx_image: xcode9
