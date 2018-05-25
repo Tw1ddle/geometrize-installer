@@ -17,8 +17,6 @@ yes | cp Geometrize appdir/geometrize
 ./linuxdeployqt --appimage-extract
 
 mkdir -p appdir/usr/
-mkdir -p appdir/usr/bin/
-yes | mv appdir/geometrize appdir/usr/bin/geometrize
 
 # Workarounds so the AppImage runs on systems that ship old gcc (and so older libstdc++/libgcc)
 # like Ubuntu 14.04 (see https://github.com/Tw1ddle/geometrize/issues/5)
@@ -40,6 +38,6 @@ chmod a+x AppRun
 popd
 
 # Pack everything back into an AppImage
-export PATH=$(readlink -f ./squashfs-root/usr/bin):$PATH
+export PATH=$(readlink -f ./squashfs-root/):$PATH
 NAME=$(grep '^Name=.*' appdir/geometrize.desktop | cut -d "=" -f 2 | sed -e 's|\ |_|g')
 ./squashfs-root/usr/bin/appimagetool -g ./appdir/ Geometrize.AppImage
