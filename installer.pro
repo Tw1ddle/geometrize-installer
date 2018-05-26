@@ -7,6 +7,14 @@ MOC_DIR = moc_files # Intermediate moc files directory
 RCC_DIR = rcc_files # Intermediate rcc files directory
 UI_DIR = ui_files # Intermediate ui files directory
 
+# We might need to ship custom versions of libs with Geometrize on Linux
+# So add a lib directory relative to the executable where we can drop libs
+linux {
+    *-g++* {
+        QMAKE_RPATHDIR += lib
+    }
+}
+
 # Perform the regular Geometrize build
 include(geometrize/geometrize.pro)
 
