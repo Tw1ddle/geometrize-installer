@@ -16,7 +16,5 @@ cp Geometrize appdir/geometrize
 # Assumes we're building this with gcc-8 and with a particular version of libstdc++
 cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25 appdir/lib/libstdc++.so.6
 
-./linuxdeployqt appdir/geometrize -appimage
-
-# Move it ready for CI deployment stage to pick it up
-mv Geometrize-x86_64.AppImage Geometrize.AppImage
+mksquashfs appdir geometrizesquashed -root-owned -noappend
+cat geometrizesquashed >> Geometrize.AppImage
