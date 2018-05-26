@@ -38,6 +38,6 @@ chmod a+x AppRun
 popd
 
 # Pack everything back into an AppImage
-export PATH=$(readlink -f ./squashfs-root/):$PATH
+export PATH=$(readlink -f ./squashfs-root):$PATH
 NAME=$(grep '^Name=.*' appdir/geometrize.desktop | cut -d "=" -f 2 | sed -e 's|\ |_|g')
 ./squashfs-root/usr/bin/appimagetool -g ./appdir/ Geometrize.AppImage
