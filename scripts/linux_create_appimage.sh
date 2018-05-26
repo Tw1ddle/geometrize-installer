@@ -2,6 +2,10 @@
 
 echo Will create AppImage
 
+# Download the AppImage runtime
+wget -c "https://github.com/AppImage/AppImageKit/releases/download/continuous/runtime-x86_64" -O runtime
+chmod a+x runtime
+
 # Download linuxdeployqt
 wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
 chmod a+x linuxdeployqt
@@ -17,4 +21,5 @@ cp Geometrize appdir/geometrize
 cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25 appdir/lib/libstdc++.so.6
 
 mksquashfs appdir geometrizesquashed -root-owned -noappend
+cat runtime >> Geometrize.AppImage
 cat geometrizesquashed >> Geometrize.AppImage
