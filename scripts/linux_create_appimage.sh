@@ -21,6 +21,7 @@ cp Geometrize appdir/geometrize
 ls -a /usr/lib/x86_64-linux-gnu/
 
 mkdir -p appdir/usr/optional/
+mkdir -p appdir/usr/optional/libgcc_s/
 mkdir -p appdir/usr/optional/libstdc++/
 
 cp /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 ./appdir/usr/optional/libgcc_s/
