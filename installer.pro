@@ -18,10 +18,16 @@ win32 {
         DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/release)
     }
 
-    # Clean (delete and recreate) the installer package data folder
     INSTALLER_PACKAGE_DATA_DIR = $$shell_quote($$shell_path($${_PRO_FILE_PWD_}/installer/packages/com.samtwidale.geometrize/data))
-    CLEAN_PACKAGE_DATA_DIR = $${QMAKE_DEL_TREE} $${INSTALLER_PACKAGE_DATA_DIR} && $${QMAKE_MKDIR} $${INSTALLER_PACKAGE_DATA_DIR}
-    QMAKE_POST_LINK = $${CLEAN_PACKAGE_DATA_DIR}
+
+    # Clean (delete and recreate) the installer package data folder
+    exists($${INSTALLER_PACKAGE_DATA_DIR}) {
+        CLEAN_PACKAGE_DATA_DIR = $${QMAKE_DEL_TREE} $${INSTALLER_PACKAGE_DATA_DIR} && $${QMAKE_MKDIR} $${INSTALLER_PACKAGE_DATA_DIR}
+        QMAKE_POST_LINK = $${CLEAN_PACKAGE_DATA_DIR}
+    } else {
+        CLEAN_PACKAGE_DATA_DIR = $${QMAKE_MKDIR} $${INSTALLER_PACKAGE_DATA_DIR}
+        QMAKE_POST_LINK = $${CLEAN_PACKAGE_DATA_DIR}
+    }
 
     # Look for local Qt installer framework, else try to download and install it
     IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/
