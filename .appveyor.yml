@@ -41,6 +41,7 @@ build_script:
   - '%make%'
   - ls -a
   - move geometrize_installer.exe geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%COMPILER_NAME%_%CONFIGURATION%.exe
+  - echo geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%COMPILER_NAME%_%CONFIGURATION%.exe > __latest
 
 # Gather artifacts
 artifacts:
