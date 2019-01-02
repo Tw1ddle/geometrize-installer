@@ -9,7 +9,7 @@
     </Licenses>
     <Default>true</Default>
     <UserInterfaces>
-        <UserInterface>page.ui</UserInterface>
+        <UserInterface>launchappcheckboxform.ui</UserInterface>
     </UserInterfaces>
     <Script>installerscript.qs</Script>
 </Package>

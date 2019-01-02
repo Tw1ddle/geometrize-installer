@@ -1,5 +1,6 @@
 function Component()
 {
+    installer.installationFinished.connect(this, Component.prototype.installationFinishedPageIsShown);
     installer.finishButtonClicked.connect(this, Component.prototype.installationFinished);
 
     gui.pageWidgetByObjectName("LicenseAgreementPage").entered.connect(changeLicenseLabels);
@@ -38,12 +39,27 @@ Component.prototype.createOperations = function()
     }
 }
 
+Component.prototype.installationFinishedPageIsShown = function()
+{
+    try {
+        if (installer.isInstaller() && installer.status == QInstaller.Success) {
+            installer.addWizardPageItem(component, "LaunchAppCheckBoxForm", QInstaller.InstallationFinished);
+        }
+    } catch(e) {
+        print(e);
+    }
+}
+
 Component.prototype.installationFinished = function()
 {
     try {
         var targetDir = installer.value("TargetDir");
-        if (installer.isInstaller() && installer.status == QInstaller.Success) {
-             installer.executeDetached(targetDir + "/Geometrize.exe");
+        if (installer.isInstaller() && installer.status == QInstaller.Success && shouldLaunchApp) {
+		    var isLaunchCheckboxChecked = component.userInterface("LaunchAppCheckBoxForm").launchAppCheckBox.checked;
+			
+			if(isLaunchCheckboxChecked) {
+                installer.executeDetached(targetDir + "/Geometrize.exe");
+			}
         }
     } catch(e) {
          print(e);
