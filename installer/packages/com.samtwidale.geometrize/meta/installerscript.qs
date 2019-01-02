@@ -54,7 +54,7 @@ Component.prototype.installationFinished = function()
 {
     try {
         var targetDir = installer.value("TargetDir");
-        if (installer.isInstaller() && installer.status == QInstaller.Success && shouldLaunchApp) {
+        if (installer.isInstaller() && installer.status == QInstaller.Success) {
 		    var isLaunchCheckboxChecked = component.userInterface("LaunchAppCheckBoxForm").launchAppCheckBox.checked;
 			
 			if(isLaunchCheckboxChecked) {
