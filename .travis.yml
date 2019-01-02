@@ -64,8 +64,8 @@ before_deploy:
   - mkdir build
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then mv Geometrize.AppImage build/geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${CXX}.AppImage ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mv Geometrize.dmg build/geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${OSX_IMAGE_NAME}.dmg ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; echo geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${CXX}.AppImage > __latest ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; echo geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${OSX_IMAGE_NAME}.dmg > __latest ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${CXX}.AppImage > __latest ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then echo geometrize_${TRAVIS_JOB_NUMBER}_${TRAVIS_OS_NAME}_${OSX_IMAGE_NAME}.dmg > __latest ; fi
   
 # Deploy to Amazon S3
 deploy:
