@@ -30,6 +30,7 @@ Component.prototype.createOperations = function()
                 installer.setValue("UserProfile", userProfile);
                 component.addOperation("CreateShortcut", "@TargetDir@\\Geometrize.exe", "@UserProfile@\\Desktop\\Geometrize.lnk");
                 component.addOperation("CreateShortcut", "@TargetDir@\\Geometrize.exe", "@StartMenuDir@\\Geometrize.lnk", "workingDirectory=@TargetDir@");
+				component.addOperation("CreateShortcut", "@TargetDir@\\Licenses\\LICENSE", "@StartMenuDir@\\LICENSE.lnk", "workingDirectory=@TargetDir@\\Licenses");
             } catch (e) {
                 // Key doesn't exist
             }

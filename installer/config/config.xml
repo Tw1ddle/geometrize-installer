@@ -9,7 +9,7 @@
     <InstallerApplicationIcon>installericon</InstallerApplicationIcon>
     <InstallerWindowIcon>installericon</InstallerWindowIcon>
     <Logo>installerlogo.png</Logo>
-    <ProductUrl>http://www.geometrize.co.uk/</ProductUrl>
+    <ProductUrl>https://www.geometrize.co.uk/</ProductUrl>
     <ControlScript>installerscript.qs</ControlScript>
     <WizardStyle>Modern</WizardStyle>
     <WizardDefaultWidth>800</WizardDefaultWidth>
