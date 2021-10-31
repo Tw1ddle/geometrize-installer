@@ -36,3 +36,6 @@
 
 # Visual studio .user files
 *.user
+
+# Unzipped/unpacked Qt installer framework folder
+scripts/ifw/*
