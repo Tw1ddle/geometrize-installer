@@ -33,3 +33,6 @@
 
 # Build Folders
 /build*
+
+# Visual studio .user files
+*.user
