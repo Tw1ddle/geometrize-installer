@@ -12,6 +12,9 @@ include(geometrize/geometrize.pro)
 
 # Create the Geometrize installer for Windows desktop
 win32 {
+    # Set this to your local Qt installer framework installation /bin directory
+    IFW_LOCATION = $(QTDIR)/../../QtIFW-3.0.1/bin/
+
     CONFIG(debug, debug|release) {
         DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/debug)
     } else {
@@ -29,22 +32,21 @@ win32 {
         QMAKE_POST_LINK = $${CLEAN_PACKAGE_DATA_DIR}
     }
 
-    # Look for local Qt installer framework, else try to download and install it
-    IFW_LOCATION = $$(QTDIR)/../../../QtIFW2.0.5/bin/
     exists($${IFW_LOCATION}) {
+
     } else {
         IFW_LOCATION = $${PWD}/scripts/ifw/bin/
         exists($${IFW_LOCATION}) {
             message("Found a downloaded Qt installer framework, will assume this is AppVeyor CI...")
         } else {
-            error("Could not locate the Qt installer framework, is it installed?")
+            error("Could not locate the Qt installer framework, is it installed? If running locally, set your installer framework install location above")
         }
     }
 
-    DEPLOY_COMMAND = windeployqt
+    DEPLOY_EXECUTABLE_PATH = $$shell_quote($$shell_path($(QTDIR)/bin/windeployqt.exe))
     TARGET_CUSTOM_EXT = .exe
     DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
-    QMAKE_POST_LINK += && $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
+    QMAKE_POST_LINK += && $${DEPLOY_EXECUTABLE_PATH} $${DEPLOY_TARGET}
 
     # Copy the Geometrize resources to the installer package data folder
     COPY_TO_INSTALLER_PACKAGE = $${QMAKE_COPY_DIR} $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR})) $${INSTALLER_PACKAGE_DATA_DIR}
@@ -62,12 +64,12 @@ win32 {
 
 # Run macdeployqt to build a .dmg for Mac OSX
 macx {
-    DEPLOY_COMMAND = macdeployqt
+    DEPLOY_EXECUTABLE_PATH = macdeployqt
     TARGET_CUSTOM_EXT = .app
     DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD})
     DEPLOY_TARGET = $$shell_quote($$shell_path($${DEPLOY_TARGET_DIR}/$${TARGET}$${TARGET_CUSTOM_EXT}))
     DEPLOY_OPTIONS = -dmg
-    QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET} $${DEPLOY_OPTIONS}
+    QMAKE_POST_LINK = $${DEPLOY_EXECUTABLE_PATH} $${DEPLOY_TARGET} $${DEPLOY_OPTIONS}
 }
 
 # Hand off control to a script that fetches and runs Linuxdeployqt, creating an appimage in the "appimage" subfolder for Linux
