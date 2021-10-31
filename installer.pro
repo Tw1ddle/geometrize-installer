@@ -13,7 +13,7 @@ include(geometrize/geometrize.pro)
 # Create the Geometrize installer for Windows desktop
 win32 {
     # Set this to your local Qt installer framework installation /bin directory
-    IFW_LOCATION = $(QTDIR)/../../QtIFW-3.0.1/bin/
+    IFW_LOCATION = $(QTDIR)/../../QtIFW-4.1.1/bin/
 
     CONFIG(debug, debug|release) {
         DEPLOY_TARGET_DIR = $$shell_path($${OUT_PWD}/debug)
