@@ -24,5 +24,13 @@ These continuous integration snapshots are not official releases, and represent 
 | ------------- | ------- | ------ | ------------
 | g++ x64       | [![Geometrize Linux Installer Build Status](https://img.shields.io/travis/Tw1ddle/geometrize-installer.svg?style=flat-square)](https://travis-ci.org/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=linux%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=linux%2F&dl_latest=true)
 
+## Building
+
+To build an installer locally:
+
+ * Follow the setup steps in [geometrize.pro](https://github.com/Tw1ddle/geometrize/blob/master/geometrize.pro).
+ * On Windows - download and install the Qt installer framework, and set the IFW_LOCATION variable in [installer.pro](https://github.com/Tw1ddle/geometrize-installer/blob/master/installer.pro) to point to it.
+ * Checkout this repository and all submodules, build and run [installer.pro](https://github.com/Tw1ddle/geometrize-installer/blob/master/installer.pro) within Qt Creator.
+
 ## Notes
  * Got an idea or suggestion? Open an issue on GitHub, or send Sam a message on [Twitter](https://twitter.com/Sam_Twidale).
