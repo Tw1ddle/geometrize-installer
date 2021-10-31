@@ -16,19 +16,6 @@ configuration:
 install:
   - git submodule update --init --recursive
   - set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin
-  - echo "Printing contents of Qt folder"
-  - cd "C:\Qt"
-  - ls
-  - echo "Printing qtdir..."
-  - echo %QTDIR%
-  - echo "Moving to and printing out qt dir contents..."
-  - cd "%QTDIR%"
-  - dir
-  - cd "%QTDIR%\bin"
-  - dir
-  - set myqtenvpath="%QTDIR%\bin\qtenv2.bat"
-  - echo "Printing myqtenvpath"
-  - echo %myqtenvpath%
   - call "%QTDIR%\bin\qtenv2.bat"
   - if %QTDIR:msvc=%==%QTDIR% set make=mingw32-make.exe
   - if %QTDIR:_64=%==%QTDIR% ( set ARCH=x86 ) else set ARCH=x64
