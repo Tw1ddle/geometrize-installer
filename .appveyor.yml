@@ -3,7 +3,7 @@ image: Visual Studio 2019
 environment:
   matrix:
     - QTDIR: C:\Qt\6.2.0\mingw81_64
-      MINGW: C:\Qt\Tools\mingw810_32
+      MINGW: C:\Qt\Tools\mingw810_64
       COMPILER_NAME: mingw81_64
     - QTDIR: C:\Qt\6.2.0\msvc2019_64
       COMPILER_NAME: msvc2019_64
