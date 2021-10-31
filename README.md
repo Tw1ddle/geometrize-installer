@@ -28,8 +28,9 @@ These continuous integration snapshots are not official releases, and represent 
 
 To build an installer locally:
 
- * Follow the setup steps in [geometrize.pro](https://github.com/Tw1ddle/geometrize/blob/master/geometrize.pro).
- * On Windows - download and install the Qt installer framework, and set the IFW_LOCATION variable in [installer.pro](https://github.com/Tw1ddle/geometrize-installer/blob/master/installer.pro) to point to it.
+ * Follow the setup steps in the main Geometrize [README.md](https://github.com/Tw1ddle/geometrize/blob/master/README.md).
+ * On *Windows* - download and install the Qt Installer Framework (IFW).
+ * Set IFW_LOCATION in [installer.pro](https://github.com/Tw1ddle/geometrize-installer/blob/master/installer.pro) to point at the IFW binary directory.
  * Checkout this repository and all submodules, build and run [installer.pro](https://github.com/Tw1ddle/geometrize-installer/blob/master/installer.pro) within Qt Creator.
 
 ## Notes
