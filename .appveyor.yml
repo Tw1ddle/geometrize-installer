@@ -17,6 +17,8 @@ install:
   - echo "Printing qtdir..."
   - echo %QTDIR%
   - echo "Moving to and printing out qt dir contents..."
+  - cd "%QTDIR%"
+  - dir
   - cd "%QTDIR%\bin"
   - dir
   - set myqtenvpath="%QTDIR%\bin\qtenv2.bat"
