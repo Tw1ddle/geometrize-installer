@@ -12,17 +12,16 @@ These continuous integration snapshots are not official releases, and represent 
 
 | Windows       | Status  | Bucket | Latest Build
 | ------------- | ------- | ------ | ------------
-| mingw x86     | [![Geometrize Windows mingw Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmingw53_32%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmingw53_32%2F&dl_latest=true)
-| msvc 2015 x86 | [![Geometrize Windows MSVC2015 x86 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc2015%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc2015%2F&dl_latest=true)
-| msvc 2015 x64 | [![Geometrize Windows MSVC2015 x64 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc2015_64%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc2015_64%2F&dl_latest=true)
+| mingw x64     | [![Geometrize Windows mingw Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmingw81_64%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmingw81_64%2F&dl_latest=true)
+| msvc x64      | [![Geometrize Windows MSVC x64 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc2019_64%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc2019_64%2F&dl_latest=true)
 
 | Mac OSX       | Status  | Bucket | Latest Build
 | ------------- | ------- | ------ | ------------
-| clang x64     | [![Geometrize OSX Installer Build Status](https://img.shields.io/travis/Tw1ddle/geometrize-installer.svg?style=flat-square)](https://travis-ci.org/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=osx%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=osx%2F&dl_latest=true)
+| clang x64     | [![Geometrize Mac OSX Clang x64 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=osx%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb==osx%2F&dl_latest=true)
 
 | Linux         | Status  | Bucket | Latest Build
 | ------------- | ------- | ------ | ------------
-| g++ x64       | [![Geometrize Linux Installer Build Status](https://img.shields.io/travis/Tw1ddle/geometrize-installer.svg?style=flat-square)](https://travis-ci.org/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=linux%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=linux%2F&dl_latest=true)
+| gcc x64       | [![Geometrize Linux GCC x64 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=linux%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb==linux%2F&dl_latest=true)
 
 ## Building
 
