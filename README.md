@@ -17,11 +17,11 @@ These continuous integration snapshots are not official releases, and represent 
 
 | Mac OSX       | Status  | Bucket | Latest Build
 | ------------- | ------- | ------ | ------------
-| clang x64     | [![Geometrize Mac OSX Clang x64 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=osx%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb==osx%2F&dl_latest=true)
+| clang x64     | [![Geometrize Mac OSX Clang x64 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=osx%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=osx%2F&dl_latest=true)
 
 | Linux         | Status  | Bucket | Latest Build
 | ------------- | ------- | ------ | ------------
-| gcc x64       | [![Geometrize Linux GCC x64 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=linux%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb==linux%2F&dl_latest=true)
+| gcc x64       | [![Geometrize Linux GCC x64 Installer Build Status](https://ci.appveyor.com/api/projects/status/lxexrj30ndqlruhd?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-installer) | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=linux%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=linux%2F&dl_latest=true)
 
 ## Building
 
