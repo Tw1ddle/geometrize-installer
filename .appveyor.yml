@@ -1,63 +1,112 @@
-image: Visual Studio 2019
+stack: python 3.9
 
+branches:
+  only:
+    - master
+
+# Note that builds run in the order the images are declared
+image:
+  - Ubuntu2004
+  - macos-bigsur
+  - Visual Studio 2019
+
+# Define the build configurations
 environment:
-  matrix:
-    - QTDIR: C:\Qt\6.2.0\mingw81_64
-      MINGW: C:\Qt\Tools\mingw810_64
-      COMPILER_NAME: mingw81_64
-    - QTDIR: C:\Qt\6.2.0\msvc2019_64
-      COMPILER_NAME: msvc2019_64
+  GITHUB_API_KEY:
+    secure: w1zaTUARBAuhkAKUke5sBvSkVtlDGL8YfQxROzv5oGIynVJImn+KWGFVDxyjQore  
 
 configuration:
   - release
 
-# Get the project submodules
-# Set the environment variables and paths to make
-install:
-  - git submodule update --init --recursive
-  - set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin
-  - call "%QTDIR%\bin\qtenv2.bat"
-  - if %QTDIR:msvc=%==%QTDIR% set make=mingw32-make.exe
-  - if %QTDIR:_64=%==%QTDIR% ( set ARCH=x86 ) else set ARCH=x64
-  - if not %QTDIR:msvc2019=%==%QTDIR% call "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" %ARCH%
-  - if not %QTDIR:msvc=%==%QTDIR% set make=nmake.exe
-  - if not %QTDIR:msvc=%==%QTDIR% %make% /? > nul
+# Do configuration-specific build steps
+for:
 
-before_build:
-  - cd %APPVEYOR_BUILD_FOLDER%
+  # Linux GCC
+  - matrix:
+      only:
+        - image: Ubuntu2004
+          BUILD_NAME: gcc_linux
+          
+      install:
+        # Configure CI bot git email/username
+        - git config --global user.name "AppVeyor CI Bot"
+        - git config --global user.email "appveyor@appveyor.org"
 
-  # Get the Qt installer framework
-  - cd scripts
-  - appveyor_windows_get_ifw.bat
-  - cd %APPVEYOR_BUILD_FOLDER%
+        - git submodule update --init --recursive
+        - git submodule update --remote --merge
 
-  # Run qmake
-  - qmake CONFIG+=%CONFIGURATION% installer.pro
+        # Push the latest versions of the submodules to the repository - note that these Linux builds run first, so other build platforms don't do this step
+        - |
+          if [[ `git status --porcelain` ]]; then
+            git checkout master
+            git add geometrize
+            git commit --message "Build bot updating submodule"
+            git remote rm origin
+            git remote add origin https://${GITHUB_API_KEY}@github.com/Tw1ddle/geometrize-installer.git > /dev/null 2>&1
+            git push origin master
+          fi
 
-# Build the project
-build_script:
-  - cd %APPVEYOR_BUILD_FOLDER%
-  - '%make%'
-  - ls -a
-  - move geometrize_installer.exe geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%COMPILER_NAME%_%CONFIGURATION%.exe
-  - echo geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%COMPILER_NAME%_%CONFIGURATION%.exe > __latest
+        - sudo apt update -qq --yes --force-yes
+        - sudo apt install libgl1-mesa-dev --yes --force-yes # Needed to avoid -lGL linker error
 
-# Gather artifacts
-artifacts:
-  - path: '**\geometrize_installer*.exe'
-    name: geometrize_installer
-    type: File
-  - path: '**\__latest'
-    name: geometrize_latest_tag
-    type: File
+        - export PATH=$HOME/Qt/6.1/gcc_64/bin:$PATH
 
-# Deploy artifacts
-deploy:
-  provider: S3
-  access_key_id: $(AWS_ACCESS_KEY_ID)
-  secret_access_key: $(AWS_SECRET_ACCESS_KEY)
-  bucket: $(AWS_S3_BUCKET_NAME)
-  region: us-east-1
-  unzip: false
-  set_public: true
-  folder: windows/%COMPILER_NAME%
+  # Clang OSX
+  - matrix:
+      only:
+        - image: macos-bigsur
+          BUILD_NAME: clang_osx
+
+  # Windows MSVC
+  - matrix:
+      only:
+        - image: Visual Studio 2019
+          BUILD_NAME: msvc_windows
+          
+    # Get the project submodules
+    # Set the environment variables and paths to make
+    install:
+      - git submodule update --init --recursive
+      - set PATH=%PATH%;C:\Qt\6.2\msvc2019_64\bin
+      - call "C:\Qt\6.2\msvc2019_64\bin\qtenv2.bat"
+      - call "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+      - set make=nmake.exe
+
+    before_build:
+      - cd %APPVEYOR_BUILD_FOLDER%
+
+      # Get the Qt installer framework
+      - cd scripts
+      - appveyor_windows_get_ifw.bat
+      - cd %APPVEYOR_BUILD_FOLDER%
+
+      # Run qmake
+      - qmake CONFIG+=%CONFIGURATION% installer.pro
+
+    # Build the project
+    build_script:
+      - cd %APPVEYOR_BUILD_FOLDER%
+      - '%make%'
+      - ls -a
+      - move geometrize_installer.exe geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%COMPILER_NAME%_%CONFIGURATION%.exe
+      - echo geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%COMPILER_NAME%_%CONFIGURATION%.exe > __latest
+
+    # Gather artifacts
+    artifacts:
+      - path: '**\geometrize_installer*.exe'
+        name: geometrize_installer
+        type: File
+      - path: '**\__latest'
+        name: geometrize_latest_tag
+        type: File
+
+    # Deploy artifacts
+    deploy:
+      provider: S3
+      access_key_id: $(AWS_ACCESS_KEY_ID)
+      secret_access_key: $(AWS_SECRET_ACCESS_KEY)
+      bucket: $(AWS_S3_BUCKET_NAME)
+      region: us-east-1
+      unzip: false
+      set_public: true
+      folder: windows/%COMPILER_NAME%
