@@ -1,7 +1,7 @@
 function Controller() {
     if (installer.isInstaller()) {
         installer.setDefaultPageVisible(QInstaller.StartMenuSelection, false);
-		installer.setDefaultPageVisible(QInstaller.ComponentSelection, false);
+        installer.setDefaultPageVisible(QInstaller.ComponentSelection, false);
     }
 }
 
