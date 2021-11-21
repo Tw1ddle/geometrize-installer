@@ -82,6 +82,12 @@ for:
 
       - export PATH=$HOME/Qt/6.1/gcc_64/bin:$PATH
 
+    before_build:
+      - cd %APPVEYOR_BUILD_FOLDER%
+      
+    build_script:
+      - cd %APPVEYOR_BUILD_FOLDER%
+
   # Clang OSX
   - matrix:
       only:
@@ -97,7 +103,6 @@ for:
     build_script:
       - cd %APPVEYOR_BUILD_FOLDER%
     
-
   # Windows MSVC
   - matrix:
       only:
