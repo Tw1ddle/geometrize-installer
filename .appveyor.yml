@@ -83,10 +83,10 @@ for:
       - export PATH=$HOME/Qt/6.1/gcc_64/bin:$PATH
 
     before_build:
-      - cd %APPVEYOR_BUILD_FOLDER%
+      - cd $APPVEYOR_BUILD_FOLDER
       
     build_script:
-      - cd %APPVEYOR_BUILD_FOLDER%
+      - cd $APPVEYOR_BUILD_FOLDER
 
   # Clang OSX
   - matrix:
@@ -98,11 +98,64 @@ for:
       - echo "implement me"
       
     before_build:
-      - cd %APPVEYOR_BUILD_FOLDER%
+      - cd $APPVEYOR_BUILD_FOLDER
       
     build_script:
+      - cd $APPVEYOR_BUILD_FOLDER
+  
+  # Mingw Windows
+  - matrix:
+      only:
+        - image: Visual Studio 2019
+          BUILD_NAME: mingw_windows
+          
+    # Get the project submodules
+    # Set the environment variables and paths to make
+    install:
+      - git submodule update --init --recursive
+      - set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin
+      - call "%QTDIR%\bin\qtenv2.bat"
+      - set make=mingw32-make.exe
+
+    before_build:
       - cd %APPVEYOR_BUILD_FOLDER%
-    
+
+      # Get the Qt installer framework
+      - cd scripts
+      - appveyor_windows_get_ifw.bat
+      - cd %APPVEYOR_BUILD_FOLDER%
+
+      # Run qmake
+      - qmake CONFIG+=%CONFIGURATION% installer.pro
+
+    # Build the project
+    build_script:
+      - cd %APPVEYOR_BUILD_FOLDER%
+      - '%make%'
+      - ls -a
+      - move geometrize_installer.exe geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%COMPILER_NAME%_%CONFIGURATION%.exe
+      - echo geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%COMPILER_NAME%_%CONFIGURATION%.exe > __latest
+
+    # Gather artifacts
+    artifacts:
+      - path: '**\geometrize_installer*.exe'
+        name: geometrize_installer
+        type: File
+      - path: '**\__latest'
+        name: geometrize_latest_tag
+        type: File
+
+    # Deploy artifacts
+    deploy:
+      provider: S3
+      access_key_id: $(AWS_ACCESS_KEY_ID)
+      secret_access_key: $(AWS_SECRET_ACCESS_KEY)
+      bucket: $(AWS_S3_BUCKET_NAME)
+      region: us-east-1
+      unzip: false
+      set_public: true
+      folder: windows/%COMPILER_NAME%
+  
   # Windows MSVC
   - matrix:
       only:
