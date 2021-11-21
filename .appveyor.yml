@@ -13,7 +13,38 @@ image:
 # Define the build configurations
 environment:
   GITHUB_API_KEY:
-    secure: w1zaTUARBAuhkAKUke5sBvSkVtlDGL8YfQxROzv5oGIynVJImn+KWGFVDxyjQore  
+    secure: w1zaTUARBAuhkAKUke5sBvSkVtlDGL8YfQxROzv5oGIynVJImn+KWGFVDxyjQore
+
+  matrix:
+    - BUILD_NAME: gcc_linux
+    - BUILD_NAME: clang_osx
+    - BUILD_NAME: mingw_windows
+      QTDIR: C:\Qt\6.2\mingw81_64
+      MINGW: C:\Qt\Tools\mingw810_64
+    - BUILD_NAME: msvc_windows
+      QTDIR: C:\Qt\6.2\msvc2019_64
+
+# Exclude invalid build configurations
+matrix:
+  exclude:
+    - image: Ubuntu2004
+      BUILD_NAME: mingw_windows
+    - image: Ubuntu2004
+      BUILD_NAME: msvc_windows
+    - image: Ubuntu2004
+      BUILD_NAME: clang_osx
+
+    - image: macos-bigsur
+      BUILD_NAME: mingw_windows
+    - image: macos-bigsur
+      BUILD_NAME: msvc_windows
+    - image: macos-bigsur
+      BUILD_NAME: gcc_linux
+
+    - image: Visual Studio 2019
+      BUILD_NAME: clang_osx
+    - image: Visual Studio 2019
+      BUILD_NAME: gcc_linux
 
 configuration:
   - release
@@ -56,6 +87,16 @@ for:
       only:
         - image: macos-bigsur
           BUILD_NAME: clang_osx
+    
+    install:
+      - echo "implement me"
+      
+    before_build:
+      - cd %APPVEYOR_BUILD_FOLDER%
+      
+    build_script:
+      - cd %APPVEYOR_BUILD_FOLDER%
+    
 
   # Windows MSVC
   - matrix:
