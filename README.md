@@ -13,8 +13,8 @@ These continuous integration snapshots are not official releases, and represent 
 
 | Windows       | Bucket  | Latest Build
 | ------------- | ------- | --------
-| mingw x64     | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmingw81_64%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmingw81_64%2F&dl_latest=true)
-| msvc x64      | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc2019_64%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc2019_64%2F&dl_latest=true)
+| mingw x64     | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmingw_windows%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmingw81_64%2F&dl_latest=true)
+| msvc x64      | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc_windows%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc2019_64%2F&dl_latest=true)
 
 | Mac OSX       | Bucket  | Latest Build
 | ------------- | ------- | --------
