@@ -18,9 +18,9 @@ environment:
   matrix:
     - BUILD_NAME: gcc_linux
     - BUILD_NAME: clang_osx
-    - BUILD_NAME: mingw_windows
-      QTDIR: C:\Qt\6.2\mingw_64
-      MINGW: C:\Qt\Tools\mingw810_64
+    #- BUILD_NAME: mingw_windows
+    #  QTDIR: C:\Qt\6.2\mingw_64
+    #  MINGW: C:\Qt\Tools\mingw810_64
     - BUILD_NAME: msvc_windows
       QTDIR: C:\Qt\6.2\msvc2019_64
 
@@ -103,58 +103,58 @@ for:
     build_script:
       - cd $APPVEYOR_BUILD_FOLDER
   
-  # Mingw Windows
-  - matrix:
-      only:
-        - image: Visual Studio 2019
-          BUILD_NAME: mingw_windows
+  # # Mingw Windows
+  # - matrix:
+      # only:
+        # - image: Visual Studio 2019
+          # BUILD_NAME: mingw_windows
           
-    # Get the project submodules
-    # Set the environment variables and paths to make
-    install:
-      - git submodule update --init --recursive
-      - set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin
-      - call "%QTDIR%\bin\qtenv2.bat"
-      - set make=mingw32-make.exe
+    # # Get the project submodules
+    # # Set the environment variables and paths to make
+    # install:
+      # - git submodule update --init --recursive
+      # - set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin
+      # - call "%QTDIR%\bin\qtenv2.bat"
+      # - set make=mingw32-make.exe
 
-    before_build:
-      - cd %APPVEYOR_BUILD_FOLDER%
+    # before_build:
+      # - cd %APPVEYOR_BUILD_FOLDER%
 
-      # Get the Qt installer framework
-      - cd scripts
-      - appveyor_windows_get_ifw.bat
-      - cd %APPVEYOR_BUILD_FOLDER%
+      # # Get the Qt installer framework
+      # - cd scripts
+      # - appveyor_windows_get_ifw.bat
+      # - cd %APPVEYOR_BUILD_FOLDER%
 
-      # Run qmake
-      - qmake CONFIG+=%CONFIGURATION% installer.pro
+      # # Run qmake
+      # - qmake CONFIG+=%CONFIGURATION% installer.pro
 
-    # Build the project
-    build_script:
-      - cd %APPVEYOR_BUILD_FOLDER%
-      - '%make%'
-      - ls -a
-      - move geometrize_installer.exe geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%BUILD_NAME%_%CONFIGURATION%.exe
-      - echo geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%BUILD_NAME%_%CONFIGURATION%.exe > __latest
+    # # Build the project
+    # build_script:
+      # - cd %APPVEYOR_BUILD_FOLDER%
+      # - '%make%'
+      # - ls -a
+      # - move geometrize_installer.exe geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%BUILD_NAME%_%CONFIGURATION%.exe
+      # - echo geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%BUILD_NAME%_%CONFIGURATION%.exe > __latest
 
-    # Gather artifacts
-    artifacts:
-      - path: '**\geometrize_installer*.exe'
-        name: geometrize_installer
-        type: File
-      - path: '**\__latest'
-        name: geometrize_latest_tag
-        type: File
+    # # Gather artifacts
+    # artifacts:
+      # - path: '**\geometrize_installer*.exe'
+        # name: geometrize_installer
+        # type: File
+      # - path: '**\__latest'
+        # name: geometrize_latest_tag
+        # type: File
 
-    # Deploy artifacts
-    deploy:
-      provider: S3
-      access_key_id: $(AWS_ACCESS_KEY_ID)
-      secret_access_key: $(AWS_SECRET_ACCESS_KEY)
-      bucket: $(AWS_S3_BUCKET_NAME)
-      region: us-east-1
-      unzip: false
-      set_public: true
-      folder: windows/%BUILD_NAME%
+    # # Deploy artifacts
+    # deploy:
+      # provider: S3
+      # access_key_id: $(AWS_ACCESS_KEY_ID)
+      # secret_access_key: $(AWS_SECRET_ACCESS_KEY)
+      # bucket: $(AWS_S3_BUCKET_NAME)
+      # region: us-east-1
+      # unzip: false
+      # set_public: true
+      # folder: windows/%BUILD_NAME%
   
   # Windows MSVC
   - matrix:
