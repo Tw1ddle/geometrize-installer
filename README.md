@@ -7,22 +7,6 @@ Development installers for [Geometrize](https://www.geometrize.co.uk/), an app f
 
 [![Geometrized Borrowdale](https://github.com/Tw1ddle/geometrize-installer/blob/master/screenshots/borrowdale.png?raw=true "Geometrized Borrowdale in Autumn, 350 rotated ellipses")](https://www.geometrize.co.uk/)
 
-## Development Builds
-
-These continuous integration snapshots are not official releases, and represent the latest untested, unstable code. Please consider getting a [stable release](https://www.geometrize.co.uk/) instead. Do not expect compatibility or consistency of features in or between these snapshots.
-
-| Windows       | Bucket  | Latest Build
-| ------------- | ------- | --------
-| msvc x64      | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc_windows%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=windows%2Fmsvc_windows%2F&dl_latest=true)
-
-| Mac OSX       | Bucket  | Latest Build
-| ------------- | ------- | --------
-| clang x64     | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=osx%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=osx%2F&dl_latest=true)
-
-| Linux         | Bucket  | Latest Build
-| ------------- | ------- | --------
-| gcc x64       | [S3 Bucket](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=linux%2F) | [Latest](https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=linux%2F&dl_latest=true)
-
 ## Building
 
 To build an installer locally:
