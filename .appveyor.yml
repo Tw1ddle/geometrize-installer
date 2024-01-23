@@ -135,26 +135,6 @@ for:
       # - ls -a
       # - move geometrize_installer.exe geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%BUILD_NAME%_%CONFIGURATION%.exe
       # - echo geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%BUILD_NAME%_%CONFIGURATION%.exe > __latest
-
-    # # Gather artifacts
-    # artifacts:
-      # - path: '**\geometrize_installer*.exe'
-        # name: geometrize_installer
-        # type: File
-      # - path: '**\__latest'
-        # name: geometrize_latest_tag
-        # type: File
-
-    # # Deploy artifacts
-    # deploy:
-      # provider: S3
-      # access_key_id: $(AWS_ACCESS_KEY_ID)
-      # secret_access_key: $(AWS_SECRET_ACCESS_KEY)
-      # bucket: $(AWS_S3_BUCKET_NAME)
-      # region: us-east-1
-      # unzip: false
-      # set_public: true
-      # folder: windows/%BUILD_NAME%
   
   # Windows MSVC
   - matrix:
@@ -190,22 +170,5 @@ for:
       - move geometrize_installer.exe geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%BUILD_NAME%_%CONFIGURATION%.exe
       - echo geometrize_installer_%APPVEYOR_BUILD_NUMBER%_%APPVEYOR_BUILD_ID%_%BUILD_NAME%_%CONFIGURATION%.exe > __latest
 
-    # Gather artifacts
-    #artifacts:
-     # - path: '**\geometrize_installer*.exe'
-       # name: geometrize_installer
-       # type: File
-     # - path: '**\__latest'
-       # name: geometrize_latest_tag
-       # type: File
-
-    # Deploy artifacts
-    # deploy:
-     # provider: S3
-     # access_key_id: $(AWS_ACCESS_KEY_ID)
-     # secret_access_key: $(AWS_SECRET_ACCESS_KEY)
-     # bucket: $(AWS_S3_BUCKET_NAME)
-     # region: us-east-1
-     # unzip: false
      # set_public: true
      # folder: windows/%BUILD_NAME%
